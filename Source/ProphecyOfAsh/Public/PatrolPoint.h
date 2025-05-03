@@ -6,6 +6,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/ArrowComponent.h"
 #include "GameFramework/Actor.h"
 #include "PatrolPoint.generated.h"
 
@@ -19,10 +20,15 @@ public:
 	APatrolPoint();
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Patrol Point")
+	UStaticMeshComponent* MeshComponent;
+	UPROPERTY(BlueprintReadWrite, Category = "Patrol Point")
+	TArray<UArrowComponent*> FwdArrowComponents;
+	UPROPERTY(BlueprintReadWrite, Category = "Patrol Point")
+	TArray<UArrowComponent*> RevArrowComponents;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Patrol Point")
+	TArray<APatrolPoint*> NextPatrolPoints;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Patrol Point")
+	TArray<APatrolPoint*> PreviousPatrolPoints;
 };

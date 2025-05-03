@@ -8,16 +8,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "POA_Character_Base.generated.h"
+#include "Character_Base.generated.h"
 
 UCLASS()
-class PROPHECYOFASH_API APOA_Character_Base : public ACharacter
+class PROPHECYOFASH_API A_Character_Base : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
-	APOA_Character_Base();
+	A_Character_Base();
 
 protected:
 	// Called when the game starts or when spawned
