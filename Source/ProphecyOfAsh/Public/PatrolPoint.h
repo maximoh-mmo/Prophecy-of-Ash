@@ -19,16 +19,21 @@ public:
 	// Sets default values for this actor's properties
 	APatrolPoint();
 
+	UFUNCTION(BlueprintCallable, Category = "Patrol Point")
+	void AddNextPoint(APatrolPoint* NextPoint);
+	UFUNCTION(BlueprintCallable, Category = "Patrol Point")
+	void AddPreviousPoint(APatrolPoint* PreviousPoint);
+	UFUNCTION(BlueprintCallable, Category = "Patrol Point")
+	void RemovePoint();
+
+	void RemovePreviousPoint(APatrolPoint* PointToRemove);
+	void RemoveNextPoint(APatrolPoint* PointToRemove);
+
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Patrol Point")
 	UStaticMeshComponent* MeshComponent;
-	UPROPERTY(BlueprintReadWrite, Category = "Patrol Point")
-	TArray<UArrowComponent*> FwdArrowComponents;
-	UPROPERTY(BlueprintReadWrite, Category = "Patrol Point")
-	TArray<UArrowComponent*> RevArrowComponents;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Patrol Point")
-	TArray<APatrolPoint*> NextPatrolPoints;
-	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Patrol Point")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Patrol Point")
+	TArray <APatrolPoint*> NextPatrolPoints;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Patrol Point")
 	TArray<APatrolPoint*> PreviousPatrolPoints;
 };
