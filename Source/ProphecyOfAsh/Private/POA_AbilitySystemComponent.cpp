@@ -3,10 +3,10 @@
 //
 // This file is part of the Prophecy of Ash project.
 
-#include "POAAbilitySystemComponent.h"
+#include "POA_AbilitySystemComponent.h"
 
 
 // Sets default values for this component's properties
-UPOAAbilitySystemComponent::UPOAAbilitySystemComponent()
+UPOA_AbilitySystemComponent::UPOA_AbilitySystemComponent()
 {
 }
