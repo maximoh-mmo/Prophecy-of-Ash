@@ -12,6 +12,7 @@
 #include "POA_Character.generated.h"
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FUpdateHealth, float, CurrentHP, float, LastHP, float, MaxHP);
 
 UCLASS()
 class PROPHECYOFASH_API APOA_Character : public ACharacter
@@ -19,35 +20,40 @@ class PROPHECYOFASH_API APOA_Character : public ACharacter
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
 	APOA_Character();
 
+	virtual void Tick(float DeltaTime) override;
+
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+
+	UFUNCTION(BlueprintCallable, Category = "Health")
+	void AddHealth(float Amount);
+	UFUNCTION(BlueprintCallable, Category = "Health")
+	void RemoveHealth(float Amount);
+
+	UPROPERTY(BlueprintAssignable, Category = "Health")
+	FUpdateHealth OnUpdateHealth;
+
 protected:
-	// Called when the game starts or when spawned
+
 	virtual void BeginPlay() override;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	class USpringArmComponent* SpringArmComp;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	class UCameraComponent* CameraComp;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "EnhancedInput")
-	class UInputDataConfig* InputActions;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "EnhancedInput")
-	class UInputMappingContext* InputMapping;
-	
 	void MoveForward(const FInputActionValue& Value);
 	void MoveRight(const FInputActionValue& Value);
 	void MoveCameraIn(const FInputActionValue& Value);
 	void Turn(const FInputActionValue& Value);
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	class USpringArmComponent* SpringArmComp;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	class UCameraComponent* CameraComp;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "EnhancedInput")
+	class UInputDataConfig* InputActions;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "EnhancedInput")
+	class UInputMappingContext* InputMapping;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
-
+private:
+	UPROPERTY()
+	float MaxHealth = 100.f;
+	UPROPERTY()
+	float CurrentHealth = 100.f;
 };
