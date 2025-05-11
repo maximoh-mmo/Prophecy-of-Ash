@@ -6,7 +6,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/ArrowComponent.h"
 #include "GameFramework/Actor.h"
 #include "PatrolPoint.generated.h"
 

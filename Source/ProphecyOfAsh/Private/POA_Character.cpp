@@ -3,13 +3,13 @@
 //
 // This file is part of the Prophecy of Ash project.
 #include "POA_Character.h"
-#include "Camera/CameraComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "GameFramework/SpringArmComponent.h"
+#include "GameFramework/GameplayCameraComponent.h"
 #include "InputActionValue.h"
 #include "InputDataConfig.h"
+#include "Kismet/GameplayStatics.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -17,15 +17,11 @@ DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 APOA_Character::APOA_Character()
 {
 	// Set up character defaults:
-	SpringArmComp = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComp"));
-	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComp"));
-
 	GetMesh()->SetRelativeLocationAndRotation(FVector(0.f, 0.f, -90.f), FQuat(FRotator(0.0f,-90.0f,0.0f)));
-
-	SpringArmComp->SetupAttachment(GetMesh());
-	CameraComp->SetupAttachment(SpringArmComp, USpringArmComponent::SocketName);
-
-	SpringArmComp->bUsePawnControlRotation = true;
+	RootComponent = GetMesh();
+	CameraComp = CreateDefaultSubobject<UGameplayCameraComponent>(TEXT("GameplayCamera"));
+	CameraComp->SetRelativeLocationAndRotation(FVector(0.f, 0.f, 100.f),FQuat(FRotator(0.f, 90.0f, 0.f)));
+	CameraComp->SetupAttachment(GetMesh());
 
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->bUseControllerDesiredRotation = true;
@@ -40,50 +36,43 @@ void APOA_Character::BeginPlay()
 	Super::BeginPlay();
 }
 
-void APOA_Character::MoveForward(const FInputActionValue& Value)
+void APOA_Character::Move(const FInputActionValue& Value)
 {
-	float FloatValue = Value.Get<float>();
-
-	if ((Controller != nullptr) && (FloatValue != 0.0f))
-	{
-		// Find out which way is forward
-		const FRotator Rotation = Controller->GetControlRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
-
-		// Get forward vector
-		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-		AddMovementInput(Direction, FloatValue);
-	}
+	auto move = Value.Get<FVector2D>();
+	auto fwd = GetActorForwardVector();
+	auto right = GetActorRightVector();
+	auto rotation = GetControlRotation();
+	AddMovementInput(right, move.X);
+	AddMovementInput(fwd, move.Y);
 }
 
-void APOA_Character::MoveRight(const FInputActionValue& Value)
+void APOA_Character::LookGamepad(const FInputActionValue& Value)
 {
-	float FloatValue = Value.Get<float>();
-	if ((Controller != nullptr) && (FloatValue != 0.0f))
-	{
-		// Find out which way is right
-		const FRotator Rotation = Controller->GetControlRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
-		// Get right vector
-		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-		AddMovementInput(Direction, FloatValue);
-	}
+	auto look = Value.Get<FVector2D>();
+	auto dt = UGameplayStatics::GetWorldDeltaSeconds(this);
+	AddControllerPitchInput(look.Y * dt);
+	AddControllerYawInput(look.X);
+
 }
 
-void APOA_Character::MoveCameraIn(const FInputActionValue& Value)
+void APOA_Character::Look(const FInputActionValue& Value)
 {
-	float FloatValue = Value.Get<float>();
-
-	if (Controller != nullptr && FloatValue != 0.0f)
-	{
-		CameraComp->SetRelativeLocation(CameraComp->GetRelativeLocation() + FVector(FloatValue, 0.f, 0.f));
-	}
+	auto look = Value.Get<FVector2D>();
+	AddControllerPitchInput(look.Y);
+	AddControllerYawInput(look.X);
 }
 
-void APOA_Character::Turn(const FInputActionValue& Value)
+void APOA_Character::Interact(const FInputActionValue& Value)
 {
-	UE_LOG(LogTemplateCharacter, Log, TEXT("Turn Value: %s"), *Value.ToString());
-	AddControllerYawInput(Value.Get<float>());
+	auto interact = Value.Get<bool>();
+	if (interact)
+	{
+		UE_LOG(LogTemplateCharacter, Log, TEXT("Interacting!"));
+	}
+	else
+	{
+		UE_LOG(LogTemplateCharacter, Log, TEXT("Not Interacting!"));
+	}
 }
 
 // Called every frame
@@ -110,13 +99,11 @@ void APOA_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 		UE_LOG(LogTemplateCharacter, Log, TEXT("'%s' Found an Enhanced Input Component!"), *GetNameSafe(this));
 
-		EnhancedInputComponent->BindAction(InputActions->TurnAction, ETriggerEvent::Triggered, this, &APOA_Character::Turn);
+		EnhancedInputComponent->BindAction(InputActions->MoveAction, ETriggerEvent::Triggered, this, &APOA_Character::Move);
 
-		EnhancedInputComponent->BindAction(InputActions->MoveForwardAction, ETriggerEvent::Triggered, this, &APOA_Character::MoveForward);
+		EnhancedInputComponent->BindAction(InputActions->LookAction, ETriggerEvent::Triggered, this, &APOA_Character::Look);
 
-		EnhancedInputComponent->BindAction(InputActions->MoveRightAction, ETriggerEvent::Triggered, this, &APOA_Character::MoveRight);
-
-		EnhancedInputComponent->BindAction(InputActions->MoveCameraInAction, ETriggerEvent::Triggered, this, &APOA_Character::MoveCameraIn);
+		EnhancedInputComponent->BindAction(InputActions->LookGamepadAction, ETriggerEvent::Triggered, this, &APOA_Character::LookGamepad);
 
 	}
 	else
