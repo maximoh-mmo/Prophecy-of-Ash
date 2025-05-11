@@ -1,5 +1,7 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
+//
+// Copyright 2025 Max Heinze. All Rights Reserved.
+//
+// This file is part of the Prophecy of Ash project.
 #pragma once
 
 #include "CoreMinimal.h"
