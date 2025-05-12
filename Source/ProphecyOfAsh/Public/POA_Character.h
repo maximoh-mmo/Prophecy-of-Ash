@@ -37,15 +37,13 @@ public:
 protected:
 
 	virtual void BeginPlay() override;
-	void MoveForward(const FInputActionValue& Value);
-	void MoveRight(const FInputActionValue& Value);
-	void MoveCameraIn(const FInputActionValue& Value);
-	void Turn(const FInputActionValue& Value);
+	void Move(const FInputActionValue& Value);
+	void LookGamepad(const FInputActionValue& Value);
+	void Look(const FInputActionValue& Value);
+	void Interact(const FInputActionValue& Value);
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	class USpringArmComponent* SpringArmComp;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	class UCameraComponent* CameraComp;
+	class UGameplayCameraComponent* CameraComp;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "EnhancedInput")
 	class UInputDataConfig* InputActions;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "EnhancedInput")
