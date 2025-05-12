@@ -38,15 +38,18 @@ protected:
 
 	virtual void BeginPlay() override;
 	void Move(const FInputActionValue& Value);
-	void LookGamepad(const FInputActionValue& Value);
+	void GamepadLook(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
+
+	UFUNCTION(BlueprintNativeEvent)
 	void Interact(const FInputActionValue& Value);
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	class UGameplayCameraComponent* CameraComp;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "EnhancedInput")
+	UFUNCTION(BlueprintNativeEvent)
+	void PauseGame(const FInputActionValue& Value);
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	class UInputDataConfig* InputActions;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "EnhancedInput")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	class UInputMappingContext* InputMapping;
 
 private:
