@@ -16,11 +16,14 @@ class PROPHECYOFASH_API UInputDataConfig : public UDataAsset
 	GENERATED_BODY()
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	UInputAction* MoveAction;
+	UInputAction* MoveForwardAction;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	UInputAction* LookAction;
+	UInputAction* MoveRightAction;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	UInputAction* LookGamepadAction;
+	UInputAction* MoveCameraInAction;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UInputAction* TurnAction;
 };
