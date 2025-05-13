@@ -30,7 +30,6 @@ void APOA_Character::BeginPlay()
 
 void APOA_Character::Move(const FInputActionValue& Value)
 {
-	UE_LOG(LogTemp, Log, TEXT("Move called!"));
 	auto move = Value.Get<FVector2D>();
 	auto fwd = GetActorForwardVector();
 	auto right = GetActorRightVector();
@@ -45,7 +44,7 @@ void APOA_Character::GamepadLook(const FInputActionValue& Value)
 {
 	auto look = Value.Get<FVector2D>();
 	auto dt = UGameplayStatics::GetWorldDeltaSeconds(this);
-	AddControllerPitchInput(look.Y * dt);
+	AddControllerPitchInput(look.Y * dt * 10);
 	AddControllerYawInput(look.X);
 }
 
