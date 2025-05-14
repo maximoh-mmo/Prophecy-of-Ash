@@ -143,25 +143,25 @@ void APOA_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 		EnhancedInputComponent->BindAction(InputActions->LookGamepadAction, ETriggerEvent::Triggered, this, &APOA_Character::GamepadLook);
 
-		EnhancedInputComponent->BindAction(InputActions->InteractAction, ETriggerEvent::Started, this, &APOA_Character::Interact);
+		EnhancedInputComponent->BindAction(InputActions->InteractAction, ETriggerEvent::Triggered, this, &APOA_Character::Interact);
 
-		EnhancedInputComponent->BindAction(InputActions->PauseAction, ETriggerEvent::Started, this, &APOA_Character::PauseGame);
+		EnhancedInputComponent->BindAction(InputActions->PauseAction, ETriggerEvent::Triggered, this, &APOA_Character::PauseGame);
 
-		EnhancedInputComponent->BindAction(InputActions->BasicAttackAction, ETriggerEvent::Started, this, &APOA_Character::BasicAttack);
+		EnhancedInputComponent->BindAction(InputActions->BasicAttackAction, ETriggerEvent::Triggered, this, &APOA_Character::BasicAttack);
 
-		EnhancedInputComponent->BindAction(InputActions->SpecialAttackAction0, ETriggerEvent::Started, this, &APOA_Character::SpecialAttack0);
+		EnhancedInputComponent->BindAction(InputActions->SpecialAttackAction0, ETriggerEvent::Triggered, this, &APOA_Character::SpecialAttack0);
 
-		EnhancedInputComponent->BindAction(InputActions->SpecialAttackAction1, ETriggerEvent::Started, this, &APOA_Character::SpecialAttack1);
+		EnhancedInputComponent->BindAction(InputActions->SpecialAttackAction1, ETriggerEvent::Triggered, this, &APOA_Character::SpecialAttack1);
 
-		EnhancedInputComponent->BindAction(InputActions->SpecialAttackAction2, ETriggerEvent::Started, this, &APOA_Character::SpecialAttack2);
+		EnhancedInputComponent->BindAction(InputActions->SpecialAttackAction2, ETriggerEvent::Triggered, this, &APOA_Character::SpecialAttack2);
 
-		EnhancedInputComponent->BindAction(InputActions->ToggleLockOnAction, ETriggerEvent::Started, this, &APOA_Character::ToggleLockOn);
+		EnhancedInputComponent->BindAction(InputActions->ToggleLockOnAction, ETriggerEvent::Triggered, this, &APOA_Character::ToggleLockOn);
 
-		EnhancedInputComponent->BindAction(InputActions->NextLockOnAction, ETriggerEvent::Started, this, &APOA_Character::NextLockOn);
+		EnhancedInputComponent->BindAction(InputActions->NextLockOnAction, ETriggerEvent::Triggered, this, &APOA_Character::NextLockOn);
 
-		EnhancedInputComponent->BindAction(InputActions->PreviousLockOnAction, ETriggerEvent::Started, this, &APOA_Character::PreviousLockOn);
+		EnhancedInputComponent->BindAction(InputActions->PreviousLockOnAction, ETriggerEvent::Triggered, this, &APOA_Character::PreviousLockOn);
 
-		EnhancedInputComponent->BindAction(InputActions->DodgeAction, ETriggerEvent::Completed, this, &APOA_Character::Dodge);
+		EnhancedInputComponent->BindAction(InputActions->DodgeAction, ETriggerEvent::Triggered, this, &APOA_Character::Dodge);
 	}
 	else
 	{
