@@ -42,6 +42,30 @@ protected:
 	void Look(const FInputActionValue& Value);
 
 	UFUNCTION(BlueprintNativeEvent)
+	void BasicAttack(const FInputActionValue& Value);
+
+	UFUNCTION(BlueprintNativeEvent)
+	void SpecialAttack0(const FInputActionValue& Value);
+
+	UFUNCTION(BlueprintNativeEvent)
+	void SpecialAttack1(const FInputActionValue& Value);
+
+	UFUNCTION(BlueprintNativeEvent)
+	void SpecialAttack2(const FInputActionValue& Value);
+
+	UFUNCTION(BlueprintNativeEvent)
+	void ToggleLockOn(const FInputActionValue& Value);
+
+	UFUNCTION(BlueprintNativeEvent)
+	void NextLockOn(const FInputActionValue& Value);
+
+	UFUNCTION(BlueprintNativeEvent)
+	void PreviousLockOn(const FInputActionValue& Value);
+
+	UFUNCTION(BlueprintNativeEvent)
+	void Dodge(const FInputActionValue& Value);
+
+	UFUNCTION(BlueprintNativeEvent)
 	void Interact(const FInputActionValue& Value);
 
 	UFUNCTION(BlueprintNativeEvent)
