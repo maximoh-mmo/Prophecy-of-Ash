@@ -30,7 +30,6 @@ void APOA_Character::BeginPlay()
 
 void APOA_Character::Move(const FInputActionValue& Value)
 {
-	UE_LOG(LogTemp, Log, TEXT("Move called!"));
 	auto move = Value.Get<FVector2D>();
 	auto fwd = GetActorForwardVector();
 	auto right = GetActorRightVector();
@@ -45,7 +44,7 @@ void APOA_Character::GamepadLook(const FInputActionValue& Value)
 {
 	auto look = Value.Get<FVector2D>();
 	auto dt = UGameplayStatics::GetWorldDeltaSeconds(this);
-	AddControllerPitchInput(look.Y * dt);
+	AddControllerPitchInput(look.Y * dt * 10);
 	AddControllerYawInput(look.X);
 }
 
@@ -54,6 +53,38 @@ void APOA_Character::Look(const FInputActionValue& Value)
 	auto look = Value.Get<FVector2D>();
 	AddControllerPitchInput(look.Y);
 	AddControllerYawInput(look.X);
+}
+
+void APOA_Character::BasicAttack_Implementation(const FInputActionValue& Value)
+{
+}
+
+void APOA_Character::SpecialAttack0_Implementation(const FInputActionValue& Value)
+{
+}
+
+void APOA_Character::SpecialAttack1_Implementation(const FInputActionValue& Value)
+{
+}
+
+void APOA_Character::SpecialAttack2_Implementation(const FInputActionValue& Value)
+{
+}
+
+void APOA_Character::ToggleLockOn_Implementation(const FInputActionValue& Value)
+{
+}
+
+void APOA_Character::NextLockOn_Implementation(const FInputActionValue& Value)
+{
+}
+
+void APOA_Character::PreviousLockOn_Implementation(const FInputActionValue& Value)
+{
+}
+
+void APOA_Character::Dodge_Implementation(const FInputActionValue& Value)
+{
 }
 
 void APOA_Character::PauseGame_Implementation(const FInputActionValue& Value)
@@ -112,10 +143,25 @@ void APOA_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 		EnhancedInputComponent->BindAction(InputActions->LookGamepadAction, ETriggerEvent::Triggered, this, &APOA_Character::GamepadLook);
 
-		EnhancedInputComponent->BindAction(InputActions->InteractAction, ETriggerEvent::Triggered, this, &APOA_Character::Interact);
+		EnhancedInputComponent->BindAction(InputActions->InteractAction, ETriggerEvent::Started, this, &APOA_Character::Interact);
 
-		EnhancedInputComponent->BindAction(InputActions->PauseAction, ETriggerEvent::Triggered, this, &APOA_Character::PauseGame);
+		EnhancedInputComponent->BindAction(InputActions->PauseAction, ETriggerEvent::Started, this, &APOA_Character::PauseGame);
 
+		EnhancedInputComponent->BindAction(InputActions->BasicAttackAction, ETriggerEvent::Started, this, &APOA_Character::BasicAttack);
+
+		EnhancedInputComponent->BindAction(InputActions->SpecialAttackAction0, ETriggerEvent::Started, this, &APOA_Character::SpecialAttack0);
+
+		EnhancedInputComponent->BindAction(InputActions->SpecialAttackAction1, ETriggerEvent::Started, this, &APOA_Character::SpecialAttack1);
+
+		EnhancedInputComponent->BindAction(InputActions->SpecialAttackAction2, ETriggerEvent::Started, this, &APOA_Character::SpecialAttack2);
+
+		EnhancedInputComponent->BindAction(InputActions->ToggleLockOnAction, ETriggerEvent::Started, this, &APOA_Character::ToggleLockOn);
+
+		EnhancedInputComponent->BindAction(InputActions->NextLockOnAction, ETriggerEvent::Started, this, &APOA_Character::NextLockOn);
+
+		EnhancedInputComponent->BindAction(InputActions->PreviousLockOnAction, ETriggerEvent::Started, this, &APOA_Character::PreviousLockOn);
+
+		EnhancedInputComponent->BindAction(InputActions->DodgeAction, ETriggerEvent::Completed, this, &APOA_Character::Dodge);
 	}
 	else
 	{
