@@ -16,7 +16,7 @@ enum class EPotionEffect : uint8
 };
 
 UCLASS(BlueprintType, Blueprintable)
-class YOUR_API UPotionItem : public UItem
+class PROPHECYOFASH_API UPotionItem : public UItem
 {
 	GENERATED_BODY()
 

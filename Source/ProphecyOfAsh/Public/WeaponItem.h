@@ -16,7 +16,7 @@ enum class EWeaponType : uint8
 };
 
 UCLASS(BlueprintType, Blueprintable)
-class YOUR_API UWeaponItem : public UItem
+class PROPHECYOFASH_API UWeaponItem : public UItem
 {
 	GENERATED_BODY()
 

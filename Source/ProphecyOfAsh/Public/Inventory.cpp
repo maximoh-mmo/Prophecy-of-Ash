@@ -5,7 +5,6 @@ UInventory::UInventory()
     PrimaryComponentTick.bCanEverTick = false;
     
     MaxSlots = 20;
-    MaxWeight = 100.0f;
 }
 
 void UInventory::BeginPlay()
@@ -15,85 +14,40 @@ void UInventory::BeginPlay()
     Slots.SetNum(MaxSlots);
 }
 
-void UInventory::AddObserver(TScriptInterface<IInventoryObserver> Observer)
-{
-    if (Observer)
-    {
-        Observers.AddUnique(Observer);
-    }
-}
-
-void UInventory::RemoveObserver(TScriptInterface<IInventoryObserver> Observer)
-{
-    if (Observer)
-    {
-        Observers.Remove(Observer);
-    }
-}
 
 void UInventory::NotifyItemAdded(UItem* Item)
 {
     if (!Item) return;
     
-    for (auto& Observer : Observers)
-    {
-        if (Observer)
-        {
-            IInventoryObserver::Execute_OnItemAdded(Observer.GetObject(), this, Item);
-        }
-    }
+    OnItemAdded.Broadcast(this, Item);
 }
 
 void UInventory::NotifyItemRemoved(UItem* Item)
 {
     if (!Item) return;
     
-    for (auto& Observer : Observers)
-    {
-        if (Observer)
-        {
-            IInventoryObserver::Execute_OnItemRemoved(Observer.GetObject(), this, Item);
-        }
-    }
+    OnItemRemoved.Broadcast(this, Item);
 }
 
 void UInventory::NotifyItemUsed(UItem* Item)
 {
     if (!Item) return;
     
-    for (auto& Observer : Observers)
-    {
-        if (Observer)
-        {
-            IInventoryObserver::Execute_OnItemUsed(Observer.GetObject(), this, Item);
-        }
-    }
+    OnItemUsed.Broadcast(this, Item);
 }
 
 void UInventory::NotifyItemEquipped(UItem* Item)
 {
     if (!Item) return;
     
-    for (auto& Observer : Observers)
-    {
-        if (Observer)
-        {
-            IInventoryObserver::Execute_OnItemEquipped(Observer.GetObject(), this, Item);
-        }
-    }
+    OnItemEquipped.Broadcast(this, Item);
 }
 
 void UInventory::NotifyItemUnequipped(UItem* Item)
 {
     if (!Item) return;
     
-    for (auto& Observer : Observers)
-    {
-        if (Observer)
-        {
-            IInventoryObserver::Execute_OnItemUnequipped(Observer.GetObject(), this, Item);
-        }
-    }
+    OnItemUnequipped.Broadcast(this, Item);
 }
 
 bool UInventory::AddItem(UItem* Item, int32 Quantity)

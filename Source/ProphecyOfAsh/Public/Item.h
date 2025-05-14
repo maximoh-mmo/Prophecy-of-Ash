@@ -13,7 +13,7 @@ enum class EItemType : uint8
 };
 
 UCLASS(Abstract, BlueprintType, Blueprintable)
-class UItem : public UObject
+class PROPHECYOFASH_API UItem : public UObject
 {
     GENERATED_BODY()
 

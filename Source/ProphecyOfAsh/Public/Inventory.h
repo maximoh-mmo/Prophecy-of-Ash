@@ -3,7 +3,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Item.h"
-#include "InventoryObserver.h"
+#include "InventoryDelegate.h"
 #include "Inventory.generated.h"
 
 USTRUCT(BlueprintType)
@@ -31,7 +31,7 @@ struct FInventorySlot
 };
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
-class YOUR_API UInventory : public UActorComponent
+class PROPHECYOFASH_API_API UInventory : public UActorComponent
 {
     GENERATED_BODY()
 
@@ -42,77 +42,69 @@ protected:
     virtual void BeginPlay() override;
 
 public:    
-    // Maximum number of items this inventory can hold
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
     int32 MaxSlots;
-
-    // Maximum weight this inventory can hold
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
-    float MaxWeight;
-
-    // Current items in the inventory
+    
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory")
     TArray<FInventorySlot> Slots;
 
-    // Currently equipped items
+    
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory")
     TArray<UItem*> EquippedItems;
 
-    // Observer pattern implementation
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory")
-    TArray<TScriptInterface<IInventoryObserver>> Observers;
 
-    // Add an observer
-    UFUNCTION(BlueprintCallable, Category = "Inventory|Observer")
-    void AddObserver(TScriptInterface<IInventoryObserver> Observer);
+    UPROPERTY(BlueprintAssignable, Category = "Inventory|Events")
+    FOnItemAddedSignature OnItemAdded;
 
-    // Remove an observer
-    UFUNCTION(BlueprintCallable, Category = "Inventory|Observer")
-    void RemoveObserver(TScriptInterface<IInventoryObserver> Observer);
+    UPROPERTY(BlueprintAssignable, Category = "Inventory|Events")
+    FOnItemRemovedSignature OnItemRemoved;
 
-    // Notify all observers about an item being added
-    UFUNCTION(BlueprintCallable, Category = "Inventory|Observer")
+    UPROPERTY(BlueprintAssignable, Category = "Inventory|Events")
+    FOnItemUsedSignature OnItemUsed;
+
+    UPROPERTY(BlueprintAssignable, Category = "Inventory|Events")
+    FOnItemEquippedSignature OnItemEquipped;
+
+    UPROPERTY(BlueprintAssignable, Category = "Inventory|Events")
+    FOnItemUnequippedSignature OnItemUnequipped;
+
+    
+    UFUNCTION(BlueprintCallable, Category = "Inventory|Events")
     void NotifyItemAdded(UItem* Item);
 
-    // Notify all observers about an item being removed
-    UFUNCTION(BlueprintCallable, Category = "Inventory|Observer")
+    UFUNCTION(BlueprintCallable, Category = "Inventory|Events")
     void NotifyItemRemoved(UItem* Item);
 
-    // Notify all observers about an item being used
-    UFUNCTION(BlueprintCallable, Category = "Inventory|Observer")
+    UFUNCTION(BlueprintCallable, Category = "Inventory|Events")
     void NotifyItemUsed(UItem* Item);
 
-    // Notify all observers about an item being equipped
-    UFUNCTION(BlueprintCallable, Category = "Inventory|Observer")
+    UFUNCTION(BlueprintCallable, Category = "Inventory|Events")
     void NotifyItemEquipped(UItem* Item);
 
-    // Notify all observers about an item being unequipped
-    UFUNCTION(BlueprintCallable, Category = "Inventory|Observer")
+    UFUNCTION(BlueprintCallable, Category = "Inventory|Events")
     void NotifyItemUnequipped(UItem* Item);
 
-    // Add item to inventory
+  
     UFUNCTION(BlueprintCallable, Category = "Inventory")
     bool AddItem(UItem* Item, int32 Quantity = 1);
 
-    // Remove item from inventory
+
     UFUNCTION(BlueprintCallable, Category = "Inventory")
     bool RemoveItem(UItem* Item, int32 Quantity = 1);
 
-    // Use an item from inventory
+    
     UFUNCTION(BlueprintCallable, Category = "Inventory")
     bool UseItem(UItem* Item);
 
-    // Equip an item from inventory
+   
     UFUNCTION(BlueprintCallable, Category = "Inventory")
     bool EquipItem(UItem* Item);
 
-    // Unequip an item
+  
     UFUNCTION(BlueprintCallable, Category = "Inventory")
     bool UnequipItem(UItem* Item);
-
-    // Helper functions
-    UFUNCTION(BlueprintCallable, Category = "Inventory")
-    float GetCurrentWeight() const;
+    
 
     UFUNCTION(BlueprintCallable, Category = "Inventory")
     int32 GetItemCount(UItem* ItemTemplate) const;

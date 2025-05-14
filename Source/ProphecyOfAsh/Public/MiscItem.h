@@ -6,7 +6,7 @@
 
 //This is for an Item that you can't do anything with
 UCLASS(BlueprintType, Blueprintable)
-class YOUR_API UMiscItem : public UItem
+class PROPHECYOFASH_API UMiscItem : public UItem
 {
 	GENERATED_BODY()
 
