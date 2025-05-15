@@ -3,35 +3,23 @@
 //
 // This file is part of the Prophecy of Ash project.
 #include "POA_Character.h"
-#include "Camera/CameraComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "GameFramework/SpringArmComponent.h"
 #include "InputActionValue.h"
 #include "InputDataConfig.h"
+#include "Kismet/GameplayStatics.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 // Sets default values
 APOA_Character::APOA_Character()
 {
-	// Set up character defaults:
-	SpringArmComp = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComp"));
-	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComp"));
-
-	GetMesh()->SetRelativeLocationAndRotation(FVector(0.f, 0.f, -90.f), FQuat(FRotator(0.0f,-90.0f,0.0f)));
-
-	SpringArmComp->SetupAttachment(GetMesh());
-	CameraComp->SetupAttachment(SpringArmComp, USpringArmComponent::SocketName);
-
-	SpringArmComp->bUsePawnControlRotation = true;
-
-	GetCharacterMovement()->bOrientRotationToMovement = true;
+	GetCharacterMovement()->bOrientRotationToMovement = false;
 	GetCharacterMovement()->bUseControllerDesiredRotation = true;
 	GetCharacterMovement()->bIgnoreBaseRotation = true;
-
 	PrimaryActorTick.bCanEverTick = true;
+
 }
 
 // Called when the game starts or when spawned
@@ -40,62 +28,101 @@ void APOA_Character::BeginPlay()
 	Super::BeginPlay();
 }
 
-void APOA_Character::MoveForward(const FInputActionValue& Value)
+void APOA_Character::Move(const FInputActionValue& Value)
 {
-	float FloatValue = Value.Get<float>();
+	auto move = Value.Get<FVector2D>();
+	auto fwd = GetActorForwardVector();
+	auto right = GetActorRightVector();
+	auto rotation = GetControlRotation();
+	right.Z = rotation.Yaw;
+	fwd.Z = rotation.Yaw;
+	AddMovementInput(right, move.X);
+	AddMovementInput(fwd, move.Y);
+}
 
-	if ((Controller != nullptr) && (FloatValue != 0.0f))
+void APOA_Character::GamepadLook(const FInputActionValue& Value)
+{
+	auto look = Value.Get<FVector2D>();
+	auto dt = UGameplayStatics::GetWorldDeltaSeconds(this);
+	AddControllerPitchInput(look.Y * dt * 10);
+	AddControllerYawInput(look.X);
+}
+
+void APOA_Character::Look(const FInputActionValue& Value)
+{
+	auto look = Value.Get<FVector2D>();
+	AddControllerPitchInput(look.Y);
+	AddControllerYawInput(look.X);
+}
+
+void APOA_Character::BasicAttack_Implementation(const FInputActionValue& Value)
+{
+}
+
+void APOA_Character::SpecialAttack0_Implementation(const FInputActionValue& Value)
+{
+}
+
+void APOA_Character::SpecialAttack1_Implementation(const FInputActionValue& Value)
+{
+}
+
+void APOA_Character::SpecialAttack2_Implementation(const FInputActionValue& Value)
+{
+}
+
+void APOA_Character::ToggleLockOn_Implementation(const FInputActionValue& Value)
+{
+}
+
+void APOA_Character::NextLockOn_Implementation(const FInputActionValue& Value)
+{
+}
+
+void APOA_Character::PreviousLockOn_Implementation(const FInputActionValue& Value)
+{
+}
+
+void APOA_Character::Dodge_Implementation(const FInputActionValue& Value)
+{
+}
+
+void APOA_Character::PauseGame_Implementation(const FInputActionValue& Value)
+{
+	auto pause = Value.Get<bool>();
+	if (pause)
 	{
-		// Find out which way is forward
-		const FRotator Rotation = Controller->GetControlRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
-
-		// Get forward vector
-		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-		AddMovementInput(Direction, FloatValue);
+		UGameplayStatics::SetGamePaused(GetWorld(), true);
+	}
+	else
+	{
+		UGameplayStatics::SetGamePaused(GetWorld(), false);
 	}
 }
 
-void APOA_Character::MoveRight(const FInputActionValue& Value)
+void APOA_Character::Interact_Implementation(const FInputActionValue& Value)
 {
-	float FloatValue = Value.Get<float>();
-	if ((Controller != nullptr) && (FloatValue != 0.0f))
+	auto interact = Value.Get<bool>();
+	if (interact)
 	{
-		// Find out which way is right
-		const FRotator Rotation = Controller->GetControlRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
-		// Get right vector
-		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-		AddMovementInput(Direction, FloatValue);
+		UE_LOG(LogTemplateCharacter, Log, TEXT("Interacting!"));
 	}
-}
-
-void APOA_Character::MoveCameraIn(const FInputActionValue& Value)
-{
-	float FloatValue = Value.Get<float>();
-
-	if (Controller != nullptr && FloatValue != 0.0f)
+	else
 	{
-		CameraComp->SetRelativeLocation(CameraComp->GetRelativeLocation() + FVector(FloatValue, 0.f, 0.f));
+		UE_LOG(LogTemplateCharacter, Log, TEXT("Not Interacting!"));
 	}
-}
-
-void APOA_Character::Turn(const FInputActionValue& Value)
-{
-	UE_LOG(LogTemplateCharacter, Log, TEXT("Turn Value: %s"), *Value.ToString());
-	AddControllerYawInput(Value.Get<float>());
 }
 
 // Called every frame
 void APOA_Character::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
 void APOA_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
+
 	APlayerController* PlayerController = Cast<APlayerController>(GetController());
 
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer());
@@ -110,14 +137,31 @@ void APOA_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 		UE_LOG(LogTemplateCharacter, Log, TEXT("'%s' Found an Enhanced Input Component!"), *GetNameSafe(this));
 
-		EnhancedInputComponent->BindAction(InputActions->TurnAction, ETriggerEvent::Triggered, this, &APOA_Character::Turn);
+		EnhancedInputComponent->BindAction(InputActions->MoveAction, ETriggerEvent::Triggered, this, &APOA_Character::Move);
 
-		EnhancedInputComponent->BindAction(InputActions->MoveForwardAction, ETriggerEvent::Triggered, this, &APOA_Character::MoveForward);
+		EnhancedInputComponent->BindAction(InputActions->LookAction, ETriggerEvent::Triggered, this, &APOA_Character::Look);
 
-		EnhancedInputComponent->BindAction(InputActions->MoveRightAction, ETriggerEvent::Triggered, this, &APOA_Character::MoveRight);
+		EnhancedInputComponent->BindAction(InputActions->LookGamepadAction, ETriggerEvent::Triggered, this, &APOA_Character::GamepadLook);
 
-		EnhancedInputComponent->BindAction(InputActions->MoveCameraInAction, ETriggerEvent::Triggered, this, &APOA_Character::MoveCameraIn);
+		EnhancedInputComponent->BindAction(InputActions->InteractAction, ETriggerEvent::Triggered, this, &APOA_Character::Interact);
 
+		EnhancedInputComponent->BindAction(InputActions->PauseAction, ETriggerEvent::Triggered, this, &APOA_Character::PauseGame);
+
+		EnhancedInputComponent->BindAction(InputActions->BasicAttackAction, ETriggerEvent::Triggered, this, &APOA_Character::BasicAttack);
+
+		EnhancedInputComponent->BindAction(InputActions->SpecialAttackAction0, ETriggerEvent::Triggered, this, &APOA_Character::SpecialAttack0);
+
+		EnhancedInputComponent->BindAction(InputActions->SpecialAttackAction1, ETriggerEvent::Triggered, this, &APOA_Character::SpecialAttack1);
+
+		EnhancedInputComponent->BindAction(InputActions->SpecialAttackAction2, ETriggerEvent::Triggered, this, &APOA_Character::SpecialAttack2);
+
+		EnhancedInputComponent->BindAction(InputActions->ToggleLockOnAction, ETriggerEvent::Triggered, this, &APOA_Character::ToggleLockOn);
+
+		EnhancedInputComponent->BindAction(InputActions->NextLockOnAction, ETriggerEvent::Triggered, this, &APOA_Character::NextLockOn);
+
+		EnhancedInputComponent->BindAction(InputActions->PreviousLockOnAction, ETriggerEvent::Triggered, this, &APOA_Character::PreviousLockOn);
+
+		EnhancedInputComponent->BindAction(InputActions->DodgeAction, ETriggerEvent::Triggered, this, &APOA_Character::Dodge);
 	}
 	else
 	{
