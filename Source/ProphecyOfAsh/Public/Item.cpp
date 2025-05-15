@@ -21,7 +21,7 @@ bool UItem::CanStack_Implementation(const UItem* OtherItem) const
 		   MaxStackCount > 1;
 }
 
-//All Implementations are placeholder -> have to be filled out
+
 bool UItem::CanUse_Implementation() const
 {
 

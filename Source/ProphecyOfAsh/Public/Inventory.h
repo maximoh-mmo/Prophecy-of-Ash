@@ -3,8 +3,16 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Item.h"
-#include "InventoryDelegate.h"
 #include "Inventory.generated.h"
+
+class UItem;
+class UInventory;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnItemAddedSignature, UInventory*, Inventory, UItem*, Item);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnItemRemovedSignature, UInventory*, Inventory, UItem*, Item);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnItemUsedSignature, UInventory*, Inventory, UItem*, Item);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnItemEquippedSignature, UInventory*, Inventory, UItem*, Item);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnItemUnequippedSignature, UInventory*, Inventory, UItem*, Item);
 
 USTRUCT(BlueprintType)
 struct FInventorySlot
@@ -31,18 +39,16 @@ struct FInventorySlot
 };
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
-class PROPHECYOFASH_API_API UInventory : public UActorComponent
+class PROPHECYOFASH_API UInventory : public UActorComponent
 {
     GENERATED_BODY()
-
-public:    
-    UInventory();
 
 protected:
     virtual void BeginPlay() override;
 
 public:    
-
+    UInventory();
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
     int32 MaxSlots;
     
