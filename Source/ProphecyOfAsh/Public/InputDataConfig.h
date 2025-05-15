@@ -16,14 +16,41 @@ class PROPHECYOFASH_API UInputDataConfig : public UDataAsset
 	GENERATED_BODY()
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	UInputAction* MoveForwardAction;
+	UInputAction* MoveAction;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	UInputAction* MoveRightAction;
+	UInputAction* LookAction;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	UInputAction* MoveCameraInAction;
+	UInputAction* LookGamepadAction;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	UInputAction* TurnAction;
+	UInputAction* InteractAction;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UInputAction* PauseAction;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UInputAction* BasicAttackAction;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UInputAction* SpecialAttackAction0;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UInputAction* SpecialAttackAction1;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UInputAction* SpecialAttackAction2;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UInputAction* ToggleLockOnAction;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UInputAction* NextLockOnAction;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UInputAction* PreviousLockOnAction;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UInputAction* DodgeAction;
 };
