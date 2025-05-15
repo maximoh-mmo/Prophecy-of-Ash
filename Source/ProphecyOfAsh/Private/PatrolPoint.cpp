@@ -5,9 +5,6 @@
 
 #include "PatrolPoint.h"
 
-#include "Kismet/KismetMathLibrary.h"
-
-
 // Sets default values
 APatrolPoint::APatrolPoint()
 {
