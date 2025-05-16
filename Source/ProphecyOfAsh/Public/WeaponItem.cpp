@@ -1,6 +1,6 @@
 ﻿#include "WeaponItem.h"
 
-UWeaponItem::UWeaponItem()
+AWeaponItem::AWeaponItem()
 {
 	Name = TEXT("Default Weapon");
 	Description = TEXT("A weapon");
@@ -14,34 +14,34 @@ UWeaponItem::UWeaponItem()
 	bIsEquipped = false;
 }
 
-bool UWeaponItem::CanUse_Implementation() const
+bool AWeaponItem::CanUse_Implementation() const
 {
 	return false;
 }
 
-bool UWeaponItem::CanEquip_Implementation() const
+bool AWeaponItem::CanEquip_Implementation() const
 {
 	return true; 
 }
 
-bool UWeaponItem::Equip_Implementation(AActor* Owner)
+bool AWeaponItem::Equip_Implementation(AActor* Actor)
 {
-	if (!Owner) return false;
+	if (!Actor) return false;
 	
 	// Debug text, should spawn weapon instead
     
-	UE_LOG(LogTemp, Display, TEXT("Weapon %s equipped by %s"), *Name, *Owner->GetName());
+	UE_LOG(LogTemp, Display, TEXT("Weapon %s equipped by %s"), *Name, *Actor->GetName());
     
 	bIsEquipped = true;
 	return true;
 }
 
-bool UWeaponItem::Unequip_Implementation(AActor* Owner)
+bool AWeaponItem::UnEquip_Implementation(AActor* Actor)
 {
-	if (!Owner) return false;
+	if (!Actor) return false;
 	
     //Debug text, should destroy weapon actor on unequip instead
-	UE_LOG(LogTemp, Display, TEXT("Weapon %s unequipped by %s"), *Name, *Owner->GetName());
+	UE_LOG(LogTemp, Display, TEXT("Weapon %s unequipped by %s"), *Name, *Actor->GetName());
     
 	bIsEquipped = false;
 	return true;
