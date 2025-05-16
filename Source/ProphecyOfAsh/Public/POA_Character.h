@@ -76,6 +76,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	class UInputMappingContext* InputMapping;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Mesh")
+	USkeletalMeshComponent* RetargetedMesh;
+
 private:
 	UPROPERTY()
 	float MaxHealth = 100.f;
