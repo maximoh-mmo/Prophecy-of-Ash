@@ -7,8 +7,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
-#include "EnhancedInputSubsystems.h"
-#include "EnhancedInputComponent.h"
 #include "POA_Character.generated.h"
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
@@ -76,9 +74,18 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	class UInputMappingContext* InputMapping;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Mesh")
+	USkeletalMeshComponent* RetargetedMesh;
+
 private:
 	UPROPERTY()
-	float MaxHealth = 100.f;
+	float MaxHealth;
 	UPROPERTY()
-	float CurrentHealth = 100.f;
+	float CurrentHealth;
+	UPROPERTY()
+	int Vigor;
+	UPROPERTY()
+	int Power;
+	UPROPERTY()
+	int Control;
 };

@@ -5,8 +5,8 @@
 #include "Item.h"
 #include "Inventory.generated.h"
 
-class UItem;
-class UInventory;
+//class UItem;
+//class UInventory;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnItemAddedSignature, UInventory*, Inventory, UItem*, Item);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnItemRemovedSignature, UInventory*, Inventory, UItem*, Item);
