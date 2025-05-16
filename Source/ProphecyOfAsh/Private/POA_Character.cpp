@@ -15,11 +15,12 @@ DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 // Sets default values
 APOA_Character::APOA_Character()
 {
+	RetargetedMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("RetargetedMesh"));
+	RetargetedMesh->SetupAttachment(GetMesh());
 	GetCharacterMovement()->bOrientRotationToMovement = false;
 	GetCharacterMovement()->bUseControllerDesiredRotation = true;
 	GetCharacterMovement()->bIgnoreBaseRotation = true;
 	PrimaryActorTick.bCanEverTick = true;
-
 }
 
 // Called when the game starts or when spawned
