@@ -1,6 +1,6 @@
 ﻿#include "PotionItem.h"
 
-UPotionItem::UPotionItem()
+APotionItem::APotionItem()
 {
 	Name = TEXT("Default Potion");
 	Description = TEXT("A Potion");
@@ -12,17 +12,17 @@ UPotionItem::UPotionItem()
 	EffectDuration = 0.0f;  
 }
 
-bool UPotionItem::CanUse_Implementation() const
+bool APotionItem::CanUse_Implementation() const
 {
 	return true;  
 }
 
-bool UPotionItem::CanEquip_Implementation() const
+bool APotionItem::CanEquip_Implementation() const
 {
 	return false;  
 }
 
-bool UPotionItem::Use_Implementation(AActor* User)
+bool APotionItem::Use_Implementation(AActor* User)
 {
 	if (!User) return false;
     

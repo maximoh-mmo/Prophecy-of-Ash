@@ -1,17 +1,17 @@
 ﻿#pragma once
 
 #include "CoreMinimal.h"
-#include "Item.h"
+#include "POA_Item.h"
 #include "MiscItem.generated.h"
 
 //This is for an Item that you can't do anything with
 UCLASS(BlueprintType, Blueprintable)
-class PROPHECYOFASH_API UMiscItem : public UItem
+class PROPHECYOFASH_API AMiscItem : public APOA_Item
 {
 	GENERATED_BODY()
 
 public:
-	UMiscItem();
+	AMiscItem();
 	
 	
 	virtual bool CanUse_Implementation() const override;

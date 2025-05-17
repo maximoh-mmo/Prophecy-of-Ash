@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "CoreMinimal.h"
-#include "Item.h"
+#include "POA_Item.h"
 #include "PotionItem.generated.h"
 
 UENUM(BlueprintType)
@@ -16,12 +16,12 @@ enum class EPotionEffect : uint8
 };
 
 UCLASS(BlueprintType, Blueprintable)
-class PROPHECYOFASH_API UPotionItem : public UItem
+class PROPHECYOFASH_API APotionItem : public APOA_Item
 {
 	GENERATED_BODY()
 
 public:
-	UPotionItem();
+	APotionItem();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Potion")
 	EPotionEffect PotionEffect;

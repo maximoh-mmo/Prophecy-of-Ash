@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "CoreMinimal.h"
-#include "Item.h"
+#include "POA_Item.h"
 #include "WeaponItem.generated.h"
 
 UENUM(BlueprintType)
@@ -16,12 +16,12 @@ enum class EWeaponType : uint8
 };
 
 UCLASS(BlueprintType, Blueprintable)
-class PROPHECYOFASH_API UWeaponItem : public UItem
+class PROPHECYOFASH_API AWeaponItem : public APOA_Item
 {
 	GENERATED_BODY()
 
 public:
-	UWeaponItem();
+	AWeaponItem();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
 	EWeaponType WeaponType;
@@ -41,6 +41,6 @@ public:
 
 	virtual bool CanUse_Implementation() const override;
 	virtual bool CanEquip_Implementation() const override;
-	virtual bool Equip_Implementation(AActor* Owner) override;
-	virtual bool Unequip_Implementation(AActor* Owner) override;
+	virtual bool Equip_Implementation(AActor* Actor) override;
+	virtual bool UnEquip_Implementation(AActor* Actor) override;
 };

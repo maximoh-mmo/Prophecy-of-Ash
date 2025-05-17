@@ -1,6 +1,6 @@
 ﻿#include "MiscItem.h"
 
-UMiscItem::UMiscItem()
+AMiscItem::AMiscItem()
 {
 	Name = TEXT("Misc Item");
 	Description = TEXT("A miscellaneous item");
@@ -8,12 +8,12 @@ UMiscItem::UMiscItem()
 	MaxStackCount = 99;  
 }
 
-bool UMiscItem::CanUse_Implementation() const
+bool AMiscItem::CanUse_Implementation() const
 {
 	return false; 
 }
 
-bool UMiscItem::CanEquip_Implementation() const
+bool AMiscItem::CanEquip_Implementation() const
 {
 	return false;  
 }
