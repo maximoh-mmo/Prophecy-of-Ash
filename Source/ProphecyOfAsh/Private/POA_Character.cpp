@@ -3,8 +3,11 @@
 //
 // This file is part of the Prophecy of Ash project.
 #include "POA_Character.h"
+
+#include "AbilitySystemComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "POA_BasicAttributeSet.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "InputActionValue.h"
 #include "InputDataConfig.h"
@@ -21,12 +24,23 @@ APOA_Character::APOA_Character()
 	GetCharacterMovement()->bUseControllerDesiredRotation = true;
 	GetCharacterMovement()->bIgnoreBaseRotation = true;
 	PrimaryActorTick.bCanEverTick = true;
+	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
+}
+
+UAbilitySystemComponent* APOA_Character::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
 }
 
 // Called when the game starts or when spawned
 void APOA_Character::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (IsValid(AbilitySystemComponent))
+	{
+		AttributeSet = AbilitySystemComponent->GetSet<UPOA_BasicAttributeSet>();
+	}
 }
 
 void APOA_Character::Move(const FInputActionValue& Value)
@@ -168,18 +182,4 @@ void APOA_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	{
 		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input Component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
 	}
-}
-
-void APOA_Character::AddHealth(float Amount)
-{
-	float NewHealth = FMath::Clamp(CurrentHealth + Amount, 0.f, MaxHealth);
-	OnUpdateHealth.Broadcast(NewHealth, CurrentHealth, MaxHealth);
-	CurrentHealth = NewHealth;
-}
-
-void APOA_Character::RemoveHealth(float Amount)
-{
-	float NewHealth = FMath::Clamp(CurrentHealth - Amount, 0.f, MaxHealth);
-	OnUpdateHealth.Broadcast(NewHealth, CurrentHealth, MaxHealth);
-	CurrentHealth = NewHealth;
 }
