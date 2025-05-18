@@ -5,15 +5,17 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "POA_Stats.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "AbilitySystemInterface.h"
 #include "POA_Character.generated.h"
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FUpdateHealth, float, CurrentHP, float, LastHP, float, MaxHP);
 
-UCLASS()
-class PROPHECYOFASH_API APOA_Character : public ACharacter
+UCLASS(config = Game)
+class PROPHECYOFASH_API APOA_Character : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -24,15 +26,11 @@ public:
 
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
-	UFUNCTION(BlueprintCallable, Category = "Health")
-	void AddHealth(float Amount);
-	UFUNCTION(BlueprintCallable, Category = "Health")
-	void RemoveHealth(float Amount);
-
 	UPROPERTY(BlueprintAssignable, Category = "Health")
 	FUpdateHealth OnUpdateHealth;
 
 protected:
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
 	virtual void BeginPlay() override;
 	void Move(const FInputActionValue& Value);
@@ -77,15 +75,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Mesh")
 	USkeletalMeshComponent* RetargetedMesh;
 
-private:
-	UPROPERTY()
-	float MaxHealth;
-	UPROPERTY()
-	float CurrentHealth;
-	UPROPERTY()
-	int Vigor;
-	UPROPERTY()
-	int Power;
-	UPROPERTY()
-	int Control;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GAS", meta = (AllowPrivateAccess = "true"))
+	UAbilitySystemComponent* AbilitySystemComponent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GAS", meta = (AllowPrivateAccess = "true"))
+	const class UPOA_BasicAttributeSet* AttributeSet;
 };
