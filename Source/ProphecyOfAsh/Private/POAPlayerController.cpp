@@ -20,18 +20,35 @@ void APOAPlayerController::SetupInputComponent()
 
 
 // Focuses the Input on the UI
-void APOAPlayerController::FocusUI(UUserWidget* FocusTarget, bool bShowCursor, bool bPauseGame)
+void APOAPlayerController::FocusUI(UWidget* FocusTarget, bool bShowCursor, bool bPauseGame, bool bUIOnly)
 {
 	SetShowMouseCursor(bShowCursor);
+    if (bUIOnly)
+    {
+        SetInputMode(FInputModeUIOnly());
+		FInputModeGameAndUI InputMode;
+		if (FocusTarget)
+		{
+			InputMode.SetWidgetToFocus(FocusTarget->TakeWidget());
+		}
+		InputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
 
-	FInputModeUIOnly InputMode;
-	if (FocusTarget)
-	{
-		InputMode.SetWidgetToFocus(FocusTarget->TakeWidget());
-	}
-	InputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-	SetInputMode(InputMode);
+		SetInputMode(InputMode);
+    }
+    else
+    {
+        SetInputMode(FInputModeGameAndUI());
+		FInputModeUIOnly InputMode;
+		if (FocusTarget)
+		{
+			InputMode.SetWidgetToFocus(FocusTarget->TakeWidget());
+		}
+		InputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
 
+		SetInputMode(InputMode);
+
+    }
+	
 	if (bPauseGame)
 	{
 		SetPause(true);
