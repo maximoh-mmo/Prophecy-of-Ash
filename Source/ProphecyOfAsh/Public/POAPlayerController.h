@@ -26,7 +26,7 @@ protected:
 public:
 	/** Focuses UI mode (UI-only input, show cursor) */
 	UFUNCTION(BlueprintCallable, Category = "UI")
-	void FocusUI(UUserWidget* FocusTarget = nullptr, bool bShowCursor = true, bool bPauseGame = false);
+	void FocusUI(UWidget* FocusTarget, bool bShowCursor, bool bPauseGame, bool bUIOnly);
 
 	/** Returns input to game mode (hide cursor, unpause) */
 	UFUNCTION(BlueprintCallable, Category = "UI")
