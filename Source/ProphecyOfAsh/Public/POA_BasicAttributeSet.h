@@ -24,6 +24,10 @@ public:
 	ATTRIBUTE_ACCESSORS(UPOA_BasicAttributeSet, Health);
 
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
+	FGameplayAttributeData MaxHealth;
+	ATTRIBUTE_ACCESSORS(UPOA_BasicAttributeSet, MaxHealth);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
 	FGameplayAttributeData Vigor;
 	ATTRIBUTE_ACCESSORS(UPOA_BasicAttributeSet, Vigor)
 
