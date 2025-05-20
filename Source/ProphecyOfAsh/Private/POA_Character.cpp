@@ -104,15 +104,7 @@ void APOA_Character::Dodge_Implementation(const FInputActionValue& Value)
 
 void APOA_Character::PauseGame_Implementation(const FInputActionValue& Value)
 {
-	auto pause = Value.Get<bool>();
-	if (pause)
-	{
-		UGameplayStatics::SetGamePaused(GetWorld(), true);
-	}
-	else
-	{
-		UGameplayStatics::SetGamePaused(GetWorld(), false);
-	}
+
 }
 
 void APOA_Character::Interact_Implementation(const FInputActionValue& Value)
