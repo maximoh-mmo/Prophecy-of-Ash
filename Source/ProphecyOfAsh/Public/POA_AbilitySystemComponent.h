@@ -3,6 +3,8 @@
 //
 // This file is part of the Prophecy of Ash project.
 
+#pragma once
+
 #include "AbilitySystemComponent.h"
 #include "CoreMinimal.h"  
 #include "GameplayTagContainer.h"
