@@ -43,5 +43,8 @@ public:
 	FGameplayAttributeData XP;
 	ATTRIBUTE_ACCESSORS(UPOA_BasicAttributeSet, XP)
 
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
+	FGameplayAttributeData Level;
+	ATTRIBUTE_ACCESSORS(UPOA_BasicAttributeSet, Level)
 
 };
