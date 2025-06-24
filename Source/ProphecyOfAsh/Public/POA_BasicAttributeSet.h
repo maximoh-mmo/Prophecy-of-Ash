@@ -50,4 +50,12 @@ public:
 	FGameplayAttributeData Level;
 	ATTRIBUTE_ACCESSORS(UPOA_BasicAttributeSet, Level)
 
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
+	FGameplayAttributeData Defense;
+	ATTRIBUTE_ACCESSORS(UPOA_BasicAttributeSet, Defense);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
+	FGameplayAttributeData ElementalDefense;
+	ATTRIBUTE_ACCESSORS(UPOA_BasicAttributeSet, ElementalDefense);
+
 };
