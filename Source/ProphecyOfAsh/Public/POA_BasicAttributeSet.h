@@ -51,6 +51,10 @@ public:
 	ATTRIBUTE_ACCESSORS(UPOA_BasicAttributeSet, Level)
 
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
+	FGameplayAttributeData Attack;
+	ATTRIBUTE_ACCESSORS(UPOA_BasicAttributeSet, Attack);
+	
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
 	FGameplayAttributeData Defense;
 	ATTRIBUTE_ACCESSORS(UPOA_BasicAttributeSet, Defense);
 
