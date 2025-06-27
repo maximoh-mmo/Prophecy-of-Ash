@@ -27,6 +27,9 @@ public:
 	FGameplayAttributeData MaxHealth;
 	ATTRIBUTE_ACCESSORS(UPOA_BasicAttributeSet, MaxHealth);
 
+	//Clamp health
+	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
+
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
 	FGameplayAttributeData Vigor;
 	ATTRIBUTE_ACCESSORS(UPOA_BasicAttributeSet, Vigor)
@@ -46,5 +49,13 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
 	FGameplayAttributeData Level;
 	ATTRIBUTE_ACCESSORS(UPOA_BasicAttributeSet, Level)
+
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
+	FGameplayAttributeData Defense;
+	ATTRIBUTE_ACCESSORS(UPOA_BasicAttributeSet, Defense);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
+	FGameplayAttributeData ElementalDefense;
+	ATTRIBUTE_ACCESSORS(UPOA_BasicAttributeSet, ElementalDefense);
 
 };
