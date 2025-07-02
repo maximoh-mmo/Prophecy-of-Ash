@@ -8,7 +8,10 @@
 
 void UUIInputSubsystem::HandleWidgetPushed(UUserWidget* Widget)
 {
-	if (!Widget) return;
+	if (!Widget)
+	{
+		return;
+	}
 
 	// Search for Default Widget
 	UWidget* FocusTarget = Widget->GetWidgetFromName(FName("DefaultFocus"));
@@ -36,10 +39,16 @@ void UUIInputSubsystem::HandleWidgetPushed(UUserWidget* Widget)
 
 void UUIInputSubsystem::SetFocusToWidget(UWidget* Widget)
 {
-	if (!Widget || !Widget->IsVisible()) return;
+	if (!Widget || !Widget->IsVisible())
+	{
+		return;
+	}
 
 	APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
-	if (!PC) return;
+	if (!PC)
+	{
+		return;
+	}
 
 	PC->SetInputMode(FInputModeUIOnly()
 		.SetWidgetToFocus(Widget->TakeWidget())
