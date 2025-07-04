@@ -31,9 +31,9 @@ studio.menu.addMenuItem({
                 myEvent.name = obj[i].Event;
                 myEvent.folder = studio.project.workspace.masterEventFolder;
 
-                for (var j = 0; j < obj[i].Tracks; j++) {
+                /*for (var j = 0; j < obj[i].Tracks; j++) {
                     var track = myEvent.addGroupTrack();
-                }
+                }*/
 
                 if (obj[i].Spatializer == "x") {
                     myEvent.masterTrack.mixerGroup.effectChain.addEffect('SpatialiserEffect');
