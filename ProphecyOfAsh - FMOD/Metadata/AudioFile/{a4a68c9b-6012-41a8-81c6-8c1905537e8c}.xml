@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{a4a68c9b-6012-41a8-81c6-8c1905537e8c}">
 		<property name="assetPath">
-			<value>S_Mechanics_Leveling_LevelUp_v5.wav</value>
+			<value>Test_Assets/S_Mechanics_Leveling_LevelUp_v5.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>

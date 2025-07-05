@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{20ec9569-dc03-4ac3-8bb7-d2ddf88dea59}">
 		<property name="assetPath">
-			<value>AmbObj_HoloHum_Loop_v2.wav</value>
+			<value>Test_Assets/AmbObj_HoloHum_Loop_v2.wav</value>
 		</property>
 		<property name="isStreaming">
 			<value>true</value>
