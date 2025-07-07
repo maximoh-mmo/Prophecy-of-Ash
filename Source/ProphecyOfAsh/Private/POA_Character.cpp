@@ -8,6 +8,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "POA_BasicAttributeSet.h"
+#include "POA_SkillpointAttributes.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "InputActionValue.h"
 #include "InputDataConfig.h"
@@ -40,6 +41,7 @@ void APOA_Character::BeginPlay()
 	if (IsValid(AbilitySystemComponent))
 	{
 		AttributeSet = AbilitySystemComponent->GetSet<UPOA_BasicAttributeSet>();
+		AttributeSet_SP = AbilitySystemComponent->GetSet<UPOA_SkillpointAttributes>();
 	}
 }
 
