@@ -55,11 +55,19 @@ public:
 	ATTRIBUTE_ACCESSORS(UPOA_BasicAttributeSet, Attack);
 	
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
+    FGameplayAttributeData ElementalAttack;
+    ATTRIBUTE_ACCESSORS(UPOA_BasicAttributeSet, ElementalAttack);
+	
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
 	FGameplayAttributeData Defense;
 	ATTRIBUTE_ACCESSORS(UPOA_BasicAttributeSet, Defense);
 
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
 	FGameplayAttributeData ElementalDefense;
 	ATTRIBUTE_ACCESSORS(UPOA_BasicAttributeSet, ElementalDefense);
+	
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
+    FGameplayAttributeData Skillpoints;
+    ATTRIBUTE_ACCESSORS(UPOA_BasicAttributeSet, Skillpoints);
 
 };
