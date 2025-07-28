@@ -4,14 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
-#include "Subsystems/Subsystem.h"
+#include "CombatFeedbackDataAsset.h"
+#include "Subsystems/WorldSubsystem.h"
 #include "POA_CombatFeedbackSubsystem.generated.h"
 
 /**
  * 
  */
-UCLASS()
-class PROPHECYOFASH_API UPOA_CombatFeedbackSubsystem : public USubsystem
+UCLASS(BlueprintType, Blueprintable)
+class PROPHECYOFASH_API UPOA_CombatFeedbackSubsystem : public UWorldSubsystem
 {
 	GENERATED_BODY()
 
@@ -20,6 +21,12 @@ public:
 	/** Trigger a feedback event based on GameplayTag */
 	UFUNCTION(BlueprintCallable, Category = "Combat Feedback")
 	void TriggerFeedback(const FGameplayTag FeedbackTag, AActor* InstigatorActor, AActor* TargetActor);
+
+	UFUNCTION(BlueprintCallable, Category = "Combat Feedback")
+	void TriggerFeedbackMultiple(const FGameplayTag FeedbackTag, AActor* InstigatorActor, const TArray<AActor*>& TargetActors);
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat Feedback")
+	UCombatFeedbackDataAsset* FeedbackDataAsset;
 
 protected:
 
