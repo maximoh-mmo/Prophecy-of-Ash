@@ -11,7 +11,7 @@ public class ProphecyOfAsh : ModuleRules
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "GameplayAbilities", "GameplayTags", "GameplayTasks", "FMODStudio" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] { "InputCore", "GameplayAbilities" , "GameplayTags", "GameplayTasks", "UMG", "FMODStudio" });
+		PrivateDependencyModuleNames.AddRange(new string[] { "InputCore", "GameplayAbilities" , "GameplayTags", "GameplayTasks", "UMG", "FMODStudio", "Niagara" });
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
