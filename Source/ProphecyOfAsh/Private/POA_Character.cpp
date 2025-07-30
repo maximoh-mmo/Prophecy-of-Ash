@@ -129,7 +129,6 @@ void APOA_Character::Tick(float DeltaTime)
 // Called to bind functionality to input
 void APOA_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-
 	APlayerController* PlayerController = Cast<APlayerController>(GetController());
 
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer());
