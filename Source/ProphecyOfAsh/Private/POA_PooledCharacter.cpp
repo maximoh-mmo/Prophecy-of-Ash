@@ -8,7 +8,7 @@
 #include "Runtime/AIModule/Classes/BrainComponent.h"
 
 // Sets default values
-APOA_PooledCharacter::APOA_PooledCharacter() : Active(false), PoolIndex(-1)
+APOA_PooledCharacter::APOA_PooledCharacter(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer), Active(false), PoolIndex(-1)
 {
 }
 

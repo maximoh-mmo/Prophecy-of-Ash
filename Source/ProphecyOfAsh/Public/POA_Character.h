@@ -11,6 +11,7 @@
 #include "POA_PooledCharacter.h"
 #include "POA_Character.generated.h"
 
+class USkeletalMeshComponentBudgeted;
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FUpdateHealth, float, CurrentHP, float, LastHP, float, MaxHP);
 
@@ -20,7 +21,7 @@ class PROPHECYOFASH_API APOA_Character : public APOA_PooledCharacter, public IAb
 	GENERATED_BODY()
 
 public:
-	APOA_Character();
+	APOA_Character(const FObjectInitializer& ObjectInitializer);
 
 	virtual void Tick(float DeltaTime) override;
 
@@ -73,7 +74,7 @@ protected:
 	class UInputMappingContext* InputMapping;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Mesh")
-	USkeletalMeshComponent* RetargetedMesh;
+	USkeletalMeshComponentBudgeted* RetargetedMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	FVector2D GamepadLookSensitivity = FVector2D(1.0f, 1.0f);

@@ -3,6 +3,8 @@
 
 #include "POA_CharacterPool.h"
 
+#include "Components/CapsuleComponent.h"
+
 // Sets default values for this component's properties
 
 UPOA_CharacterPool::UPOA_CharacterPool()
@@ -15,7 +17,8 @@ APOA_PooledCharacter* UPOA_CharacterPool::TakeFromPool(FVector Location = FVecto
 	{
 		if (Character && !Character->IsActive())
 		{
-			Character->TeleportTo(Location, Rotation);
+			Location += Character->GetCapsuleComponent()->GetScaledCapsuleHalfHeight() * FVector(0, 0, 1);
+			Character->TeleportTo(Location, Rotation, false, true);
 			Character->SetActive(true);
 			SpawnedCharacterIndices.Add(Character->GetPoolIndex());
 			return Character;
@@ -27,7 +30,7 @@ APOA_PooledCharacter* UPOA_CharacterPool::TakeFromPool(FVector Location = FVecto
 		ExtendPool(DefaultPoolSize);
 		return TakeFromPool(Location, Rotation);
 	}
-	UE_LOG(LogTemp, Error, TEXT("No available characters in pool!"));
+	UE_LOG(LogTemp, Error, TEXT("No available characters in pool! Pool size %d"), PoolSize);
 	return nullptr;
 }
 
@@ -90,6 +93,7 @@ void UPOA_CharacterPool::ExtendPool(int count)
 			UE_LOG(LogTemp, Error, TEXT("PooledCharacterClass is not set!"));
 		}
 	}
+	PoolSize += count;
 }
 
 // Called when the game starts

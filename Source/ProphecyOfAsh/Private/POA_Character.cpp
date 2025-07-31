@@ -12,13 +12,15 @@
 #include "InputActionValue.h"
 #include "InputDataConfig.h"
 #include "Kismet/GameplayStatics.h"
+#include "AnimationBudgetAllocator/Public/SkeletalMeshComponentBudgeted.h"
+#include "IAnimationBudgetAllocator.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 // Sets default values
-APOA_Character::APOA_Character()
+APOA_Character::APOA_Character(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer.SetDefaultSubobjectClass<USkeletalMeshComponentBudgeted>(ACharacter::MeshComponentName))
 {
-	RetargetedMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("RetargetedMesh"));
+	RetargetedMesh = CreateDefaultSubobject<USkeletalMeshComponentBudgeted>(TEXT("RetargetedMesh"));
 	RetargetedMesh->SetupAttachment(GetMesh());
 	GetCharacterMovement()->bOrientRotationToMovement = false;
 	GetCharacterMovement()->bUseControllerDesiredRotation = true;
@@ -36,7 +38,7 @@ UAbilitySystemComponent* APOA_Character::GetAbilitySystemComponent() const
 void APOA_Character::BeginPlay()
 {
 	Super::BeginPlay();
-
+	IAnimationBudgetAllocator::Get(GetWorld())->SetEnabled(true);
 	if (IsValid(AbilitySystemComponent))
 	{
 		AttributeSet = AbilitySystemComponent->GetSet<UPOA_BasicAttributeSet>();
