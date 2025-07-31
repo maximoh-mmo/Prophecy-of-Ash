@@ -59,8 +59,8 @@ void APOA_Character::GamepadLook(const FInputActionValue& Value)
 {
 	auto look = Value.Get<FVector2D>();
 	auto dt = UGameplayStatics::GetWorldDeltaSeconds(this);
-	AddControllerPitchInput(look.Y * dt * 10);
-	AddControllerYawInput(look.X);
+	AddControllerPitchInput(look.Y * GamepadLookSensitivity.Y);
+	AddControllerYawInput(look.X * GamepadLookSensitivity.X);
 }
 
 void APOA_Character::Look(const FInputActionValue& Value)

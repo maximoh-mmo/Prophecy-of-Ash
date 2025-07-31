@@ -4,17 +4,18 @@
 #include "POA_CharacterPool.h"
 
 // Sets default values for this component's properties
+
 UPOA_CharacterPool::UPOA_CharacterPool()
 {
 }
 
-APOA_PooledCharacter* UPOA_CharacterPool::TakeFromPool()
+APOA_PooledCharacter* UPOA_CharacterPool::TakeFromPool(FVector Location = FVector().Zero(), FRotator Rotation = FRotator().ZeroRotator)
 {
 	for (APOA_PooledCharacter* Character : CharacterPool)
 	{
 		if (Character && !Character->IsActive())
 		{
-			Character->TeleportTo(FVector().Zero(), FRotator().ZeroRotator);
+			Character->TeleportTo(Location, Rotation);
 			Character->SetActive(true);
 			SpawnedCharacterIndices.Add(Character->GetPoolIndex());
 			return Character;
@@ -24,10 +25,30 @@ APOA_PooledCharacter* UPOA_CharacterPool::TakeFromPool()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("No available characters in pool, extending pool..."));
 		ExtendPool(DefaultPoolSize);
-		return TakeFromPool();
+		return TakeFromPool(Location, Rotation);
 	}
 	UE_LOG(LogTemp, Error, TEXT("No available characters in pool!"));
 	return nullptr;
+}
+
+void UPOA_CharacterPool::SetPoolClass(TSubclassOf<APOA_PooledCharacter> NewPooledCharacterClass)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Setting new PooledCharacterClass: %s"), *NewPooledCharacterClass->GetName());
+	PooledCharacterClass = NewPooledCharacterClass;
+	if (CharacterPool.Num() != 0)
+	{
+		for (APOA_PooledCharacter* Character : CharacterPool)
+		{
+			if (Character)
+			{
+				Character->SetActive(false);
+				Character->Destroy();
+			}
+		}
+		CharacterPool.Empty();
+		SpawnedCharacterIndices.Empty();
+	}
+	ExtendPool(DefaultPoolSize);
 }
 
 
@@ -79,6 +100,8 @@ void UPOA_CharacterPool::BeginPlay()
 	{
 		PoolSize = DefaultPoolSize;
 	}
+	if (PooledCharacterClass == nullptr)
+		return;
 	ExtendPool(PoolSize);
 }
 

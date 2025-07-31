@@ -75,6 +75,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Mesh")
 	USkeletalMeshComponent* RetargetedMesh;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	FVector2D GamepadLookSensitivity = FVector2D(1.0f, 1.0f);
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GAS", meta = (AllowPrivateAccess = "true"))
 	UAbilitySystemComponent* AbilitySystemComponent;
 
