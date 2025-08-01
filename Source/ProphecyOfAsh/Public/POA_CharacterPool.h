@@ -13,14 +13,17 @@ class PROPHECYOFASH_API UPOA_CharacterPool : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
-	// Sets default values for this component's properties
+public:
 	UPOA_CharacterPool();
+	// Sets default values for this component's properties
 
 	UFUNCTION(BlueprintCallable, Category = "Character Pool")
-	APOA_PooledCharacter* TakeFromPool();
+	APOA_PooledCharacter* TakeFromPool(FVector Location, FRotator Rotation);
 
-	UPROPERTY(EditAnywhere, Category = "Character Pool")
+	UFUNCTION(BlueprintCallable, Category = "Character Pool")
+	void SetPoolClass(TSubclassOf<APOA_PooledCharacter> NewPooledCharacterClass);
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Pool")
 	TSubclassOf<APOA_PooledCharacter> PooledCharacterClass;
 
 	UPROPERTY(EditAnywhere, Category = "Character Pool")

@@ -3,18 +3,22 @@
 
 #include "POA_CharacterPool.h"
 
+#include "Components/CapsuleComponent.h"
+
 // Sets default values for this component's properties
+
 UPOA_CharacterPool::UPOA_CharacterPool()
 {
 }
 
-APOA_PooledCharacter* UPOA_CharacterPool::TakeFromPool()
+APOA_PooledCharacter* UPOA_CharacterPool::TakeFromPool(FVector Location = FVector().Zero(), FRotator Rotation = FRotator().ZeroRotator)
 {
 	for (APOA_PooledCharacter* Character : CharacterPool)
 	{
 		if (Character && !Character->IsActive())
 		{
-			Character->TeleportTo(FVector().Zero(), FRotator().ZeroRotator);
+			Location += Character->GetCapsuleComponent()->GetScaledCapsuleHalfHeight() * FVector(0, 0, 1);
+			Character->TeleportTo(Location, Rotation, false, true);
 			Character->SetActive(true);
 			SpawnedCharacterIndices.Add(Character->GetPoolIndex());
 			return Character;
@@ -24,10 +28,30 @@ APOA_PooledCharacter* UPOA_CharacterPool::TakeFromPool()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("No available characters in pool, extending pool..."));
 		ExtendPool(DefaultPoolSize);
-		return TakeFromPool();
+		return TakeFromPool(Location, Rotation);
 	}
-	UE_LOG(LogTemp, Error, TEXT("No available characters in pool!"));
+	UE_LOG(LogTemp, Error, TEXT("No available characters in pool! Pool size %d"), PoolSize);
 	return nullptr;
+}
+
+void UPOA_CharacterPool::SetPoolClass(TSubclassOf<APOA_PooledCharacter> NewPooledCharacterClass)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Setting new PooledCharacterClass: %s"), *NewPooledCharacterClass->GetName());
+	PooledCharacterClass = NewPooledCharacterClass;
+	if (CharacterPool.Num() != 0)
+	{
+		for (APOA_PooledCharacter* Character : CharacterPool)
+		{
+			if (Character)
+			{
+				Character->SetActive(false);
+				Character->Destroy();
+			}
+		}
+		CharacterPool.Empty();
+		SpawnedCharacterIndices.Empty();
+	}
+	ExtendPool(DefaultPoolSize);
 }
 
 
@@ -69,6 +93,7 @@ void UPOA_CharacterPool::ExtendPool(int count)
 			UE_LOG(LogTemp, Error, TEXT("PooledCharacterClass is not set!"));
 		}
 	}
+	PoolSize += count;
 }
 
 // Called when the game starts
@@ -79,6 +104,8 @@ void UPOA_CharacterPool::BeginPlay()
 	{
 		PoolSize = DefaultPoolSize;
 	}
+	if (PooledCharacterClass == nullptr)
+		return;
 	ExtendPool(PoolSize);
 }
 

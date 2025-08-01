@@ -12,13 +12,15 @@
 #include "InputActionValue.h"
 #include "InputDataConfig.h"
 #include "Kismet/GameplayStatics.h"
+#include "AnimationBudgetAllocator/Public/SkeletalMeshComponentBudgeted.h"
+#include "IAnimationBudgetAllocator.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 // Sets default values
-APOA_Character::APOA_Character()
+APOA_Character::APOA_Character(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer.SetDefaultSubobjectClass<USkeletalMeshComponentBudgeted>(ACharacter::MeshComponentName))
 {
-	RetargetedMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("RetargetedMesh"));
+	RetargetedMesh = CreateDefaultSubobject<USkeletalMeshComponentBudgeted>(TEXT("RetargetedMesh"));
 	RetargetedMesh->SetupAttachment(GetMesh());
 	GetCharacterMovement()->bOrientRotationToMovement = false;
 	GetCharacterMovement()->bUseControllerDesiredRotation = true;
@@ -36,7 +38,7 @@ UAbilitySystemComponent* APOA_Character::GetAbilitySystemComponent() const
 void APOA_Character::BeginPlay()
 {
 	Super::BeginPlay();
-
+	IAnimationBudgetAllocator::Get(GetWorld())->SetEnabled(true);
 	if (IsValid(AbilitySystemComponent))
 	{
 		AttributeSet = AbilitySystemComponent->GetSet<UPOA_BasicAttributeSet>();
@@ -59,8 +61,8 @@ void APOA_Character::GamepadLook(const FInputActionValue& Value)
 {
 	auto look = Value.Get<FVector2D>();
 	auto dt = UGameplayStatics::GetWorldDeltaSeconds(this);
-	AddControllerPitchInput(look.Y * dt * 10);
-	AddControllerYawInput(look.X);
+	AddControllerPitchInput(look.Y * GamepadLookSensitivity.Y);
+	AddControllerYawInput(look.X * GamepadLookSensitivity.X);
 }
 
 void APOA_Character::Look(const FInputActionValue& Value)

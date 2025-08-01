@@ -14,7 +14,7 @@ class PROPHECYOFASH_API APOA_PooledCharacter : public ACharacter
 	GENERATED_BODY()
 
 public:
-	APOA_PooledCharacter();
+	APOA_PooledCharacter(const FObjectInitializer& ObjectInitializer);
 
 	FOnPooledCharacterDespawn OnPooledCharacterDespawn;
 

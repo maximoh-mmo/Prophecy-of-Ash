@@ -3,8 +3,12 @@
 
 #include "POA_PooledCharacter.h"
 
+#include "GameFramework/CharacterMovementComponent.h"
+#include "Runtime/AIModule/Classes/AIController.h"
+#include "Runtime/AIModule/Classes/BrainComponent.h"
+
 // Sets default values
-APOA_PooledCharacter::APOA_PooledCharacter() : Active(false), PoolIndex(-1)
+APOA_PooledCharacter::APOA_PooledCharacter(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer), Active(false), PoolIndex(-1)
 {
 }
 
@@ -12,11 +16,42 @@ void APOA_PooledCharacter::Deactivate()
 {
 	Active = false;
 	SetActorHiddenInGame(true);
+	AAIController* AIController = Cast<AAIController>(GetController());
+	if (AIController)
+	{
+		AIController->UnPossess();
+		AIController->GetBrainComponent()->StopLogic(TEXT("Deactivated"));
+		AIController->Destroy();
+	}
+	GetCharacterMovement()->SetComponentTickEnabled(false);
 }
 
 void APOA_PooledCharacter::SetActive(bool bActivate)
 {
 	Active = bActivate;
+	if (!bActivate)
+	{
+		Deactivate();
+		return;
+	}
+	AAIController* AIController = Cast<AAIController>(GetController());
+	if (AIController)
+	{
+		AIController->Possess(this);
+		AIController->GetBrainComponent()->RestartLogic();
+	}
+	else
+	{
+		
+		AController* NewController = GetWorld()->SpawnActor<AController>(AIControllerClass, GetActorLocation(), GetActorRotation());
+		if (NewController != nullptr)
+		{
+			// if successful will result in setting this->Controller 
+			// as part of possession mechanics
+			NewController->Possess(this);
+		}
+	}
+	GetCharacterMovement()->SetComponentTickEnabled(bActivate);
 	SetActorHiddenInGame(!bActivate);
 }
 
