@@ -24,14 +24,10 @@ APOA_PooledCharacter* UPOA_CharacterPool::TakeFromPool(FVector Location = FVecto
 			return Character;
 		}
 	}
-	if (CharacterPool.Num() == SpawnedCharacterIndices.Num())
-	{
-		UE_LOG(LogTemp, Warning, TEXT("No available characters in pool, extending pool..."));
-		ExtendPool(DefaultPoolSize);
-		return TakeFromPool(Location, Rotation);
-	}
-	UE_LOG(LogTemp, Error, TEXT("No available characters in pool! Pool size %d"), PoolSize);
-	return nullptr;
+
+	UE_LOG(LogTemp, Warning, TEXT("No available characters in pool, extending pool..."));
+	ExtendPool();
+	return TakeFromPool(Location, Rotation);
 }
 
 void UPOA_CharacterPool::SetPoolClass(TSubclassOf<APOA_PooledCharacter> NewPooledCharacterClass)
@@ -51,7 +47,7 @@ void UPOA_CharacterPool::SetPoolClass(TSubclassOf<APOA_PooledCharacter> NewPoole
 		CharacterPool.Empty();
 		SpawnedCharacterIndices.Empty();
 	}
-	ExtendPool(DefaultPoolSize);
+	ExtendPool();
 }
 
 
@@ -60,8 +56,18 @@ void UPOA_CharacterPool::OnPooledCharacterDespawn(APOA_PooledCharacter* PoolActo
 	SpawnedCharacterIndices.Remove(PoolActor->GetPoolIndex());
 }
 
-void UPOA_CharacterPool::ExtendPool(int count)
+void UPOA_CharacterPool::ExtendPool()
 {
+	if (Extending)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Already extending pool, skipping..."));
+		return;
+	}
+	Extending = true;
+	if (PoolSize == CharacterPool.Num())
+	{
+		PoolSize += DefaultPoolSize;
+	}
 	UWorld* World = GetWorld();
 	if (!World)
 	{
@@ -69,7 +75,7 @@ void UPOA_CharacterPool::ExtendPool(int count)
 		return;
 	}
 
-	for (int i = 0; i < count; ++i)
+	while (CharacterPool.Num() < PoolSize)
 	{
 		if (PooledCharacterClass)
 		{
@@ -80,8 +86,8 @@ void UPOA_CharacterPool::ExtendPool(int count)
 			{
 				NewCharacter->SetActive(false);
 				NewCharacter->OnPooledCharacterDespawn.AddDynamic(this, &UPOA_CharacterPool::OnPooledCharacterDespawn);
-				CharacterPool.Add(NewCharacter);
 				NewCharacter->SetPoolIndex(CharacterPool.Num());
+				CharacterPool.Add(NewCharacter);
 			}
 			else
 			{
@@ -93,7 +99,7 @@ void UPOA_CharacterPool::ExtendPool(int count)
 			UE_LOG(LogTemp, Error, TEXT("PooledCharacterClass is not set!"));
 		}
 	}
-	PoolSize += count;
+	Extending = false;
 }
 
 // Called when the game starts
@@ -106,6 +112,6 @@ void UPOA_CharacterPool::BeginPlay()
 	}
 	if (PooledCharacterClass == nullptr)
 		return;
-	ExtendPool(PoolSize);
+	ExtendPool();
 }
 

@@ -33,7 +33,7 @@ public:
 	void OnPooledCharacterDespawn(APOA_PooledCharacter* PoolActor);
 
 protected:
-	void ExtendPool(int count);
+	void ExtendPool();
 
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -42,4 +42,5 @@ protected:
 	TArray<APOA_PooledCharacter*> CharacterPool;
 	TArray<int> SpawnedCharacterIndices;
 	int DefaultPoolSize = 20;
+	bool Extending = false;
 };
