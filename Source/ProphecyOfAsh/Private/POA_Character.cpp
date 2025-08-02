@@ -21,9 +21,13 @@ DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 APOA_Character::APOA_Character(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	if (GetWorld()) {
-		if (!IAnimationBudgetAllocator::Get(GetWorld())->GetEnabled())
+		// Ensure the Animation Budget Allocator is enabled
+		if (IAnimationBudgetAllocator::Get(GetWorld()))
 		{
-			IAnimationBudgetAllocator::Get(GetWorld())->SetEnabled(true);
+			if (!IAnimationBudgetAllocator::Get(GetWorld())->GetEnabled())
+			{
+				IAnimationBudgetAllocator::Get(GetWorld())->SetEnabled(true);
+			}			
 		}
 	}
 	RetargetedMesh = CreateDefaultSubobject<USkeletalMeshComponentBudgeted>(TEXT("RetargetedMesh"));
