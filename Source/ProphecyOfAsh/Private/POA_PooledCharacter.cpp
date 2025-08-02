@@ -3,13 +3,20 @@
 
 #include "POA_PooledCharacter.h"
 
+#include "SkeletalMeshComponentBudgeted.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Runtime/AIModule/Classes/AIController.h"
 #include "Runtime/AIModule/Classes/BrainComponent.h"
 
 // Sets default values
-APOA_PooledCharacter::APOA_PooledCharacter(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer), Active(false), PoolIndex(-1)
+APOA_PooledCharacter::APOA_PooledCharacter(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer.SetDefaultSubobjectClass<USkeletalMeshComponentBudgeted>(ACharacter::MeshComponentName)), Active(false), PoolIndex(-1)
 {
+	// Set the mesh to be budgeted
+	if (auto mesh =Cast<USkeletalMeshComponentBudgeted>(GetMesh()))
+	{
+		mesh->SetAutoRegisterWithBudgetAllocator(true);
+		mesh->SetAutoCalculateSignificance(true);
+	}
 }
 
 void APOA_PooledCharacter::Deactivate()

@@ -18,10 +18,18 @@
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 // Sets default values
-APOA_Character::APOA_Character(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer.SetDefaultSubobjectClass<USkeletalMeshComponentBudgeted>(ACharacter::MeshComponentName))
+APOA_Character::APOA_Character(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
+	if (GetWorld()) {
+		if (!IAnimationBudgetAllocator::Get(GetWorld())->GetEnabled())
+		{
+			IAnimationBudgetAllocator::Get(GetWorld())->SetEnabled(true);
+		}
+	}
 	RetargetedMesh = CreateDefaultSubobject<USkeletalMeshComponentBudgeted>(TEXT("RetargetedMesh"));
 	RetargetedMesh->SetupAttachment(GetMesh());
+	RetargetedMesh->SetAutoRegisterWithBudgetAllocator(true);
+	RetargetedMesh->SetAutoCalculateSignificance(true);
 	GetCharacterMovement()->bOrientRotationToMovement = false;
 	GetCharacterMovement()->bUseControllerDesiredRotation = true;
 	GetCharacterMovement()->bIgnoreBaseRotation = true;
@@ -42,6 +50,7 @@ void APOA_Character::BeginPlay()
 	if (IsValid(AbilitySystemComponent))
 	{
 		AttributeSet = AbilitySystemComponent->GetSet<UPOA_BasicAttributeSet>();
+		
 	}
 }
 
