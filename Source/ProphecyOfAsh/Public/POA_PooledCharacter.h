@@ -8,6 +8,18 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPooledCharacterDespawn, APOA_PooledCharacter*, PoolActor);
 
+USTRUCT()
+struct FCachedCollisionState
+{
+	GENERATED_BODY()
+
+	TWeakObjectPtr<UPrimitiveComponent> Component;
+	ECollisionEnabled::Type CollisionEnabled;
+	TEnumAsByte<ECollisionChannel> ObjectType;
+	FCollisionResponseContainer CollisionResponses;
+};
+
+
 UCLASS()
 class PROPHECYOFASH_API APOA_PooledCharacter : public ACharacter
 {
@@ -31,4 +43,11 @@ protected:
 
 	bool Active;
 	int32 PoolIndex;
+
+	UPROPERTY()
+	TArray<FCachedCollisionState> CachedCollisionStates;
+
+	void DisableAllCollision();
+	void CacheCollisionStates();
+	void RestoreCollisionStates();
 };

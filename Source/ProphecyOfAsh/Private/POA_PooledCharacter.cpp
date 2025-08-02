@@ -31,6 +31,11 @@ void APOA_PooledCharacter::Deactivate()
 		AIController->Destroy();
 	}
 	GetCharacterMovement()->SetComponentTickEnabled(false);
+
+	//Save collision state and disable collision
+
+	CacheCollisionStates();
+	DisableAllCollision();
 }
 
 void APOA_PooledCharacter::SetActive(bool bActivate)
@@ -60,6 +65,8 @@ void APOA_PooledCharacter::SetActive(bool bActivate)
 	}
 	GetCharacterMovement()->SetComponentTickEnabled(bActivate);
 	SetActorHiddenInGame(!bActivate);
+
+	RestoreCollisionStates();
 }
 
 void APOA_PooledCharacter::SetPoolIndex(const int32 Index)
@@ -75,5 +82,51 @@ bool APOA_PooledCharacter::IsActive() const
 int APOA_PooledCharacter::GetPoolIndex() const
 {
 	return PoolIndex;
+}
+
+void APOA_PooledCharacter::DisableAllCollision()
+{
+	TInlineComponentArray<UPrimitiveComponent*> Components;
+	GetComponents<UPrimitiveComponent>(Components);
+		
+	for (UPrimitiveComponent* Comp : Components)
+	{
+		if (!Comp) continue;
+		
+		Comp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	}
+}
+
+void APOA_PooledCharacter::CacheCollisionStates()
+{
+	CachedCollisionStates.Empty();
+
+	TInlineComponentArray<UPrimitiveComponent*> Components;
+	GetComponents<UPrimitiveComponent>(Components);
+
+	for ( UPrimitiveComponent* Comp : Components)
+	{
+		if (!Comp) continue;
+		FCachedCollisionState State;
+		State.Component = Comp;
+		State.CollisionEnabled = Comp->GetCollisionEnabled();
+		State.ObjectType = Comp->GetCollisionObjectType();
+		State.CollisionResponses = Comp->GetCollisionResponseToChannels();
+
+		CachedCollisionStates.Add(State);
+	}
+}
+
+void APOA_PooledCharacter::RestoreCollisionStates()
+{
+	for (const FCachedCollisionState& State : CachedCollisionStates)
+	{
+		if (!State.Component.IsValid()) continue;
+		
+		State.Component->SetCollisionEnabled(State.CollisionEnabled);
+		State.Component->SetCollisionObjectType(State.ObjectType);
+		State.Component->SetCollisionResponseToChannels(State.CollisionResponses);
+	}
+	CachedCollisionStates.Empty();
 }
 
