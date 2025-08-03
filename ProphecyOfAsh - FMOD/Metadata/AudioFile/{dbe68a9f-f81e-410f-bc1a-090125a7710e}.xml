@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{dbe68a9f-f81e-410f-bc1a-090125a7710e}">
 		<property name="assetPath">
-			<value>JR_S_Character_Death_OnKillEnemy_SCREAM_01_v1.wav</value>
+			<value>Placeholder Assets/JR_S_Character_Death_OnKillEnemy_SCREAM_01_v1.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>

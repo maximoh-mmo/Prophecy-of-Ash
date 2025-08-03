@@ -1,3 +1,8 @@
+//
+// Copyright 2025 Max Heinze. All Rights Reserved.
+//
+// This file is part of the Prophecy of Ash project.
+
 #include "POA_BasicAttributeSet.h"
 #include "AbilitySystemComponent.h"
 #include "POA_Character.h"

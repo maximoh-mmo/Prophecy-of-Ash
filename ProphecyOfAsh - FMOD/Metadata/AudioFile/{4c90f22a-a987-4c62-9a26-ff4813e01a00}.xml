@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{4c90f22a-a987-4c62-9a26-ff4813e01a00}">
 		<property name="assetPath">
-			<value>NG_060_S_Weapon_BulletHit_OnImpact_Wood_01.wav</value>
+			<value>Placeholder Assets/NG_060_S_Weapon_BulletHit_OnImpact_Wood_01.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>

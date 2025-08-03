@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{79224c70-1072-4905-94d7-7bdc0d983efa}">
+		<property name="assetPath">
+			<value>S_Enemy_Small_Damaged_01_v2.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>1.2712708333333333</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{ce97fb2b-57e9-4fcc-9099-c14385fc6904}</destination>
+		</relationship>
+	</object>
+</objects>

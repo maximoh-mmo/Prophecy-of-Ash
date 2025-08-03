@@ -8,19 +8,32 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "POA_BasicAttributeSet.h"
-#include "POA_SkillpointAttributes.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "InputActionValue.h"
 #include "InputDataConfig.h"
 #include "Kismet/GameplayStatics.h"
+#include "AnimationBudgetAllocator/Public/SkeletalMeshComponentBudgeted.h"
+#include "IAnimationBudgetAllocator.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 // Sets default values
-APOA_Character::APOA_Character()
+APOA_Character::APOA_Character(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
-	RetargetedMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("RetargetedMesh"));
+	if (GetWorld()) {
+		// Ensure the Animation Budget Allocator is enabled
+		if (IAnimationBudgetAllocator::Get(GetWorld()))
+		{
+			if (!IAnimationBudgetAllocator::Get(GetWorld())->GetEnabled())
+			{
+				IAnimationBudgetAllocator::Get(GetWorld())->SetEnabled(true);
+			}			
+		}
+	}
+	RetargetedMesh = CreateDefaultSubobject<USkeletalMeshComponentBudgeted>(TEXT("RetargetedMesh"));
 	RetargetedMesh->SetupAttachment(GetMesh());
+	RetargetedMesh->SetAutoRegisterWithBudgetAllocator(true);
+	RetargetedMesh->SetAutoCalculateSignificance(true);
 	GetCharacterMovement()->bOrientRotationToMovement = false;
 	GetCharacterMovement()->bUseControllerDesiredRotation = true;
 	GetCharacterMovement()->bIgnoreBaseRotation = true;
@@ -37,11 +50,11 @@ UAbilitySystemComponent* APOA_Character::GetAbilitySystemComponent() const
 void APOA_Character::BeginPlay()
 {
 	Super::BeginPlay();
-
+	IAnimationBudgetAllocator::Get(GetWorld())->SetEnabled(true);
 	if (IsValid(AbilitySystemComponent))
 	{
 		AttributeSet = AbilitySystemComponent->GetSet<UPOA_BasicAttributeSet>();
-		AttributeSet_SP = AbilitySystemComponent->GetSet<UPOA_SkillpointAttributes>();
+		
 	}
 }
 
@@ -61,8 +74,8 @@ void APOA_Character::GamepadLook(const FInputActionValue& Value)
 {
 	auto look = Value.Get<FVector2D>();
 	auto dt = UGameplayStatics::GetWorldDeltaSeconds(this);
-	AddControllerPitchInput(look.Y * dt * 10);
-	AddControllerYawInput(look.X);
+	AddControllerPitchInput(look.Y * GamepadLookSensitivity.Y);
+	AddControllerYawInput(look.X * GamepadLookSensitivity.X);
 }
 
 void APOA_Character::Look(const FInputActionValue& Value)
@@ -131,7 +144,6 @@ void APOA_Character::Tick(float DeltaTime)
 // Called to bind functionality to input
 void APOA_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-
 	APlayerController* PlayerController = Cast<APlayerController>(GetController());
 
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer());

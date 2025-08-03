@@ -86,6 +86,10 @@
 		{
 			"Name": "MobilePatchingUtils",
 			"Enabled": false
+		},
+		{
+			"Name": "AnimationBudgetAllocator",
+			"Enabled": true
 		}
 	]
 }
