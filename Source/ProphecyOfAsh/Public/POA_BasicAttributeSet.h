@@ -1,3 +1,7 @@
+//
+// Copyright 2025 Max Heinze. All Rights Reserved.
+//
+// This file is part of the Prophecy of Ash project.
 
 
 #pragma once
