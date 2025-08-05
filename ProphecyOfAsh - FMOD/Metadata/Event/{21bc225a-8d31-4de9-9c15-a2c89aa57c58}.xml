@@ -266,7 +266,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{2aca043f-cc7e-48df-9dfd-837c1d5d1014}">
 		<property name="volume">
-			<value>5</value>
+			<value>6.5</value>
 		</property>
 		<property name="name">
 			<value>Thunder</value>
@@ -495,7 +495,7 @@
 			<value>0</value>
 		</property>
 		<property name="value">
-			<value>-80</value>
+			<value>-24.5</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{d904cd83-38c4-4910-8916-226e238addbc}">
@@ -503,7 +503,7 @@
 			<value>1</value>
 		</property>
 		<property name="value">
-			<value>0</value>
+			<value>10</value>
 		</property>
 	</object>
 </objects>

@@ -60,6 +60,7 @@ void APOA_Character::BeginPlay()
 
 void APOA_Character::Move(const FInputActionValue& Value)
 {
+	if (IsDead)	return;
 	auto move = Value.Get<FVector2D>();
 	auto fwd = GetActorForwardVector();
 	auto right = GetActorRightVector();
@@ -72,6 +73,7 @@ void APOA_Character::Move(const FInputActionValue& Value)
 
 void APOA_Character::GamepadLook(const FInputActionValue& Value)
 {
+	if (IsDead)	return;
 	auto look = Value.Get<FVector2D>();
 	auto dt = UGameplayStatics::GetWorldDeltaSeconds(this);
 	AddControllerPitchInput(look.Y * GamepadLookSensitivity.Y);
@@ -80,6 +82,7 @@ void APOA_Character::GamepadLook(const FInputActionValue& Value)
 
 void APOA_Character::Look(const FInputActionValue& Value)
 {
+	if (IsDead)	return;
 	auto look = Value.Get<FVector2D>();
 	AddControllerPitchInput(look.Y);
 	AddControllerYawInput(look.X);
