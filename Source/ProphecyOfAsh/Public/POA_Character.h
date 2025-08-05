@@ -29,6 +29,8 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Health")
 	FUpdateHealth OnUpdateHealth;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+	bool IsDead;
 protected:
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
