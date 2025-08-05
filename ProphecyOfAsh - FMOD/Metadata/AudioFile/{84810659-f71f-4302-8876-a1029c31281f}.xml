@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{84810659-f71f-4302-8876-a1029c31281f}">
 		<property name="assetPath">
-			<value>AmbObj_LeavesRustle_Loop.wav</value>
+			<value>Placeholder Assets/AmbObj_LeavesRustle_Loop.wav</value>
 		</property>
 		<property name="isStreaming">
 			<value>true</value>

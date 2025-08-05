@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{e729588a-52ec-4f72-97d7-7c14c4255378}">
 		<property name="assetPath">
-			<value>NG_026_S_Mechanics_SupportPack_Health_OnPickup_01.wav</value>
+			<value>Placeholder Assets/NG_026_S_Mechanics_SupportPack_Health_OnPickup_01.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>

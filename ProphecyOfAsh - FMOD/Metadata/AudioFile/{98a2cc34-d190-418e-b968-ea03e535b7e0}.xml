@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{98a2cc34-d190-418e-b968-ea03e535b7e0}">
 		<property name="assetPath">
-			<value>JR_S_Character_Health_OnDamageTaken_General_PUNCH_01_v1.wav</value>
+			<value>Placeholder Assets/JR_S_Character_Health_OnDamageTaken_General_PUNCH_01_v1.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>

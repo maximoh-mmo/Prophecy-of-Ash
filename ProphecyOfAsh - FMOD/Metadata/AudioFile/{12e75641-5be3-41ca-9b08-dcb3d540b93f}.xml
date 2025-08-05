@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{12e75641-5be3-41ca-9b08-dcb3d540b93f}">
 		<property name="assetPath">
-			<value>JR_001_S_Character_Movement_WALK_MAT_Mud_01_v1.wav</value>
+			<value>Placeholder Assets/JR_001_S_Character_Movement_WALK_MAT_Mud_01_v1.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>
