@@ -5,7 +5,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "AbilitySystemInterface.h"
 #include "POA_PooledCharacter.h"
@@ -30,6 +29,8 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Health")
 	FUpdateHealth OnUpdateHealth;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+	bool IsDead;
 protected:
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 

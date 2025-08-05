@@ -21,9 +21,13 @@ DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 APOA_Character::APOA_Character(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	if (GetWorld()) {
-		if (!IAnimationBudgetAllocator::Get(GetWorld())->GetEnabled())
+		// Ensure the Animation Budget Allocator is enabled
+		if (IAnimationBudgetAllocator::Get(GetWorld()))
 		{
-			IAnimationBudgetAllocator::Get(GetWorld())->SetEnabled(true);
+			if (!IAnimationBudgetAllocator::Get(GetWorld())->GetEnabled())
+			{
+				IAnimationBudgetAllocator::Get(GetWorld())->SetEnabled(true);
+			}			
 		}
 	}
 	RetargetedMesh = CreateDefaultSubobject<USkeletalMeshComponentBudgeted>(TEXT("RetargetedMesh"));
@@ -56,6 +60,7 @@ void APOA_Character::BeginPlay()
 
 void APOA_Character::Move(const FInputActionValue& Value)
 {
+	if (IsDead)	return;
 	auto move = Value.Get<FVector2D>();
 	auto fwd = GetActorForwardVector();
 	auto right = GetActorRightVector();
@@ -68,6 +73,7 @@ void APOA_Character::Move(const FInputActionValue& Value)
 
 void APOA_Character::GamepadLook(const FInputActionValue& Value)
 {
+	if (IsDead)	return;
 	auto look = Value.Get<FVector2D>();
 	auto dt = UGameplayStatics::GetWorldDeltaSeconds(this);
 	AddControllerPitchInput(look.Y * GamepadLookSensitivity.Y);
@@ -76,6 +82,7 @@ void APOA_Character::GamepadLook(const FInputActionValue& Value)
 
 void APOA_Character::Look(const FInputActionValue& Value)
 {
+	if (IsDead)	return;
 	auto look = Value.Get<FVector2D>();
 	AddControllerPitchInput(look.Y);
 	AddControllerYawInput(look.X);

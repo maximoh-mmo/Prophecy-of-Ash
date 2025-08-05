@@ -1,17 +1,15 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 using UnrealBuildTool;
-using UnrealBuildTool.Rules;
-
 public class ProphecyOfAsh : ModuleRules
 {
 	public ProphecyOfAsh(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "GameplayAbilities", "GameplayTags", "GameplayTasks", "FMODStudio", "AIModule", "NavigationSystem", "AnimationBudgetAllocator"});
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "GameplayAbilities", "GameplayTags", "GameplayTasks", "FMODStudio", "AIModule", "NavigationSystem", "AnimationBudgetAllocator", "NavigationSystem"});
 
-		PrivateDependencyModuleNames.AddRange(new string[] { "InputCore", "GameplayAbilities" , "GameplayTags", "GameplayTasks", "UMG", "FMODStudio", "Niagara" });
+		PrivateDependencyModuleNames.AddRange(new string[] { "InputCore", "GameplayAbilities" , "GameplayTags", "GameplayTasks", "UMG", "FMODStudio", "Niagara", "AnimationBudgetAllocator" });
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
