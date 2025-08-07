@@ -26,6 +26,9 @@ public:
 
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
+	UFUNCTION(BlueprintCallable, Category = "AITargetingUpdate")
+	void UpdateNavAgenManually();
+
 	UPROPERTY(BlueprintAssignable, Category = "Health")
 	FUpdateHealth OnUpdateHealth;
 
