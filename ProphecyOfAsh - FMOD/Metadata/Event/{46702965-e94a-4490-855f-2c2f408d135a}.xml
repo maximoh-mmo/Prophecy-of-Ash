@@ -5,7 +5,7 @@
 			<value>Ambience_Water</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{96d6d695-7659-4bd2-8b56-9e140625c83d}</destination>
@@ -142,6 +142,7 @@
 	<object class="MixerBusEffectChain" id="{1b3f3351-4923-4435-80e0-cb7b8f97a0ba}">
 		<relationship name="effects">
 			<destination>{90ef3e94-4e60-40fe-b300-2f3a446390f0}</destination>
+			<destination>{72ab859e-ec00-4a43-8793-e2d136bea161}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{599c5869-2d75-43ce-8cc5-0eb57395930b}" />
@@ -161,5 +162,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{86d78ea6-e5ad-4897-b058-b0c587cf25dc}" />
 	<object class="MixerBusFader" id="{90ef3e94-4e60-40fe-b300-2f3a446390f0}" />
+	<object class="SpatialiserEffect" id="{72ab859e-ec00-4a43-8793-e2d136bea161}" />
 	<object class="MixerBusFader" id="{6c735744-54e8-48c8-a460-425c2de5ee51}" />
 </objects>
