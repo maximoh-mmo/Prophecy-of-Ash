@@ -28,9 +28,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat Feedback")
 	UCombatFeedbackDataAsset* FeedbackDataAsset;
 
-protected:
-
 	/** Implement this in Blueprint to drive VFX, SFX, CamShake, etc. */
-	UFUNCTION(BlueprintImplementableEvent, Category = "Combat Feedback")
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent,Category = "Combat Feedback")
 	void HandleFeedback_BP(const FGameplayTag FeedbackTag, AActor* InstigatorActor, AActor* TargetActor);
+	
+
 };
