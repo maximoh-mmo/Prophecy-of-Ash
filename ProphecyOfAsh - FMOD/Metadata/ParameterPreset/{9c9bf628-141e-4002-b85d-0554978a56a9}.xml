@@ -16,13 +16,12 @@
 			<value>2</value>
 		</property>
 		<property name="maximum">
-			<value>5</value>
+			<value>4</value>
 		</property>
 		<property name="enumerationLabels">
 			<value>Sand</value>
 			<value>Stone</value>
 			<value>Dirt</value>
-			<value>Grass</value>
 			<value>Water</value>
 		</property>
 		<property name="initialValue">

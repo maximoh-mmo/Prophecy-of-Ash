@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{4a7cb0a0-5f1b-4127-a128-e00e2a3a97fe}">
+		<property name="assetPath">
+			<value>AA_Player_Assets/AA_Player_Dodge/Dodge-003.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.5</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{ce97fb2b-57e9-4fcc-9099-c14385fc6904}</destination>
+		</relationship>
+	</object>
+</objects>
