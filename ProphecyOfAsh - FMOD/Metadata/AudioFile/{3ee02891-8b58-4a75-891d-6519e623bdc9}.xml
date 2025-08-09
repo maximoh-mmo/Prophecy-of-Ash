@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{3ee02891-8b58-4a75-891d-6519e623bdc9}">
 		<property name="assetPath">
-			<value>Fireball_Impact_01.wav</value>
+			<value>AA_Player_Assets/AA_Player_Fireball/Fireball_Impact_01.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>

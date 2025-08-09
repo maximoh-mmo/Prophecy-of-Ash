@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="EncodableAsset" id="{0ac8da52-2b3c-450c-ac81-1256e0dd3418}">
+		<property name="assetPath">
+			<value>AA_Player_Assets/AA_Hit_Gore/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{ce97fb2b-57e9-4fcc-9099-c14385fc6904}</destination>
+		</relationship>
+	</object>
+</objects>
