@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{7b411eb9-da70-494c-b4d1-b2ddca253d92}">
 		<property name="assetPath">
-			<value>UI/NG_014_S_PoA_SFX_UI_PickUPObject_02.wav</value>
+			<value>NG_UI_Assets/NG_014_S_PoA_SFX_UI_PickUPObject_02.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>

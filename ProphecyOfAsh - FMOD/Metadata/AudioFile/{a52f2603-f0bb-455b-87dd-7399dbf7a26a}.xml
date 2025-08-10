@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{a52f2603-f0bb-455b-87dd-7399dbf7a26a}">
 		<property name="assetPath">
-			<value>Ambience/NG_009_S_PoA_Ambient_Thunder_03.wav</value>
+			<value>NG_Ambience_Assets/NG_009_S_PoA_Ambient_Thunder_03.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>
