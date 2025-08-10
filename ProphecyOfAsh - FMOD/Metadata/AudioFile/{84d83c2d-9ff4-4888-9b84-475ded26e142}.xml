@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{84d83c2d-9ff4-4888-9b84-475ded26e142}">
 		<property name="assetPath">
-			<value>106-glued.wav</value>
+			<value>JR_Enemy_Assets/106-glued.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>

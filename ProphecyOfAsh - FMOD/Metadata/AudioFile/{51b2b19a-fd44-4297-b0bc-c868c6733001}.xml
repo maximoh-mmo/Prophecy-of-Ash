@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{51b2b19a-fd44-4297-b0bc-c868c6733001}">
 		<property name="assetPath">
-			<value>Defeat.wav</value>
+			<value>AK_Music_Assets/Defeat.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>

@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{1c8dfae5-7edb-4062-b7a1-93e38d09dba8}">
 		<property name="assetPath">
-			<value>S_Enemy_Small_Idle_01_LOOP_v3.wav</value>
+			<value>Placeholder Assets/S_Enemy_Small_Idle_01_LOOP_v3.wav</value>
 		</property>
 		<property name="isStreaming">
 			<value>true</value>
