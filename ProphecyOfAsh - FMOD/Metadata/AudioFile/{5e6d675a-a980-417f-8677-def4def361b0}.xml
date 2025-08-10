@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{5e6d675a-a980-417f-8677-def4def361b0}">
+		<property name="assetPath">
+			<value>JR_Enemy_Assets/JR_Ghoul_Attack_2_03_Master_v1.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>3.7000000000000002</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{ce97fb2b-57e9-4fcc-9099-c14385fc6904}</destination>
+		</relationship>
+	</object>
+</objects>
