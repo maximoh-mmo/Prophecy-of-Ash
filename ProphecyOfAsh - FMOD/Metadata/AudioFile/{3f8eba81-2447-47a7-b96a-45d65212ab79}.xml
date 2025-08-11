@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{3f8eba81-2447-47a7-b96a-45d65212ab79}">
 		<property name="assetPath">
-			<value>JR_Isrif_Attack_4_02_MOVE_v1.wav</value>
+			<value>JR_Enemy_Assets/JR_Isrif_Attack_4_02_MOVE_v1.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>

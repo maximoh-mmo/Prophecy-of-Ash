@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
-	<object class="AudioFile" id="{bcd32422-6425-45a0-a467-61551d09bcbb}">
+	<object class="AudioFile" id="{4a3f4ff8-42d1-482d-9c2a-b3f9f0027e55}">
 		<property name="assetPath">
-			<value>JR_Enemy_Assets/JR_Isrif_Attack_4_03_SCREAM_v1.wav</value>
+			<value>JR_Enemy_Assets/JR_Isrif_Attack_4_03_Master_v1.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>
