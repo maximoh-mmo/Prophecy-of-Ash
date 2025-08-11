@@ -150,7 +150,7 @@
 	</object>
 	<object class="MultiSound" id="{e85cc2c3-058e-4afb-b0c2-0fb27cabf8da}">
 		<property name="volume">
-			<value>-4.5</value>
+			<value>-3</value>
 		</property>
 		<relationship name="sounds">
 			<destination>{00cc7a99-9920-4290-bdc0-438a84b0036b}</destination>
