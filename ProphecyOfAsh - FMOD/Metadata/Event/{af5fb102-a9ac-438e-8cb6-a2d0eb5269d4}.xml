@@ -124,14 +124,19 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{3c4655b4-7be7-4998-a551-02cca4c9d9ad}">
 		<relationship name="effects">
+			<destination>{b7b342ec-a5b6-49de-bf6e-ecda01cb7d0b}</destination>
 			<destination>{2209c87e-d0e0-4ed7-b73b-4d82f2844c88}</destination>
 			<destination>{ceb3b663-8d54-4648-a8e3-ad42de5f3709}</destination>
+			<destination>{b8444def-6909-4cc1-a4ee-bb159225c436}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{ca7c8d7b-bc5d-4ef4-af77-546673e39ba1}" />
 	<object class="MultiSound" id="{03c87cee-e5d3-4d7d-9f5c-70a1e15a7e69}">
+		<property name="volume">
+			<value>-2.5</value>
+		</property>
 		<relationship name="modulators">
-			<destination>{89a724fa-03ac-4c67-bcd4-b2750130145b}</destination>
+			<destination>{81aa25df-e87c-44ad-a5eb-9602bbf3187e}</destination>
 		</relationship>
 		<relationship name="sounds">
 			<destination>{ad37da86-3679-496a-aa54-f34478d5cf07}</destination>
@@ -147,20 +152,33 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{84b8b590-98cd-447d-beab-30268916a36b}" />
+	<object class="ThreeEQEffect" id="{b7b342ec-a5b6-49de-bf6e-ecda01cb7d0b}">
+		<property name="lowGain">
+			<value>-2</value>
+		</property>
+		<property name="midGain">
+			<value>-4.5</value>
+		</property>
+		<property name="highGain">
+			<value>-1</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{2209c87e-d0e0-4ed7-b73b-4d82f2844c88}" />
 	<object class="SpatialiserEffect" id="{ceb3b663-8d54-4648-a8e3-ad42de5f3709}" />
-	<object class="ADSRModulator" id="{89a724fa-03ac-4c67-bcd4-b2750130145b}">
+	<object class="ThreeEQEffect" id="{b8444def-6909-4cc1-a4ee-bb159225c436}">
+		<property name="midGain">
+			<value>-1.5</value>
+		</property>
+		<property name="highGain">
+			<value>-4</value>
+		</property>
+	</object>
+	<object class="RandomizerModulator" id="{81aa25df-e87c-44ad-a5eb-9602bbf3187e}">
 		<property name="nameOfPropertyBeingModulated">
-			<value>volume</value>
+			<value>pitch</value>
 		</property>
-		<property name="initialValue">
-			<value>-80</value>
-		</property>
-		<property name="attackTime">
-			<value>140</value>
-		</property>
-		<property name="finalValue">
-			<value>-80</value>
+		<property name="amount">
+			<value>4</value>
 		</property>
 	</object>
 	<object class="SingleSound" id="{ad37da86-3679-496a-aa54-f34478d5cf07}">
