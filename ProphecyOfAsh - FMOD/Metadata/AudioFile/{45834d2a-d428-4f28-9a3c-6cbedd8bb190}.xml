@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{45834d2a-d428-4f28-9a3c-6cbedd8bb190}">
 		<property name="assetPath">
-			<value>Ambience/NG_011_S_PoA_Ambient_NightAmbience_01.wav</value>
+			<value>NG_Ambience_Assets/NG_011_S_PoA_Ambient_NightAmbience_01.wav</value>
 		</property>
 		<property name="isStreaming">
 			<value>true</value>

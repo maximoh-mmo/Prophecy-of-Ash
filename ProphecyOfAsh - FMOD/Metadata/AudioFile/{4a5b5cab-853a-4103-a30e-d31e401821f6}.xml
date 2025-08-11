@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{4a5b5cab-853a-4103-a30e-d31e401821f6}">
+		<property name="assetPath">
+			<value>JR_Enemy_Assets/JR_GhoulScream Short 07_JREN_NONE.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>3</value>
+		</property>
+		<property name="length">
+			<value>1.0567083333333334</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{ce97fb2b-57e9-4fcc-9099-c14385fc6904}</destination>
+		</relationship>
+	</object>
+</objects>

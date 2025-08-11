@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{bcc95c50-b708-48af-bb15-2a83c5a69d9b}">
 		<property name="assetPath">
-			<value>UI/NG_012_S_PoA_SFX_UI_Hover_01.wav</value>
+			<value>NG_UI_Assets/NG_012_S_PoA_SFX_UI_Hover_01.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>
