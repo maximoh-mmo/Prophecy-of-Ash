@@ -38,7 +38,7 @@ void APOA_PlayerCharacter::BeginPlay()
 				if (NavSystem->GetRandomPointInNavigableRadius(SPLoc, SP->SpawnRadius, NavLocation))
 				{
 					SpawnLocations.Add(NavLocation.Location);
-					UE_LOG(LogEnemyPool, Log, TEXT("Added %s"), *NavLocation.Location.ToCompactString() )
+					//UE_LOG(LogEnemyPool, Log, TEXT("Added %s"), *NavLocation.Location.ToCompactString() )
 					break;
 				}
 			}

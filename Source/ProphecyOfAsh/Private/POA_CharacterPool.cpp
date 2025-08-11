@@ -28,14 +28,14 @@ APOA_PooledCharacter* UPOA_CharacterPool::TakeFromPool(FVector Location = FVecto
 		}
 	}
 
-	UE_LOG(LogTemp, Warning, TEXT("No available characters in pool, extending pool..."));
+	//UE_LOG(LogTemp, Warning, TEXT("No available characters in pool, extending pool..."));
 	ExtendPool();
 	return TakeFromPool(Location, Rotation);
 }
 
 void UPOA_CharacterPool::SetPoolClass(TSubclassOf<APOA_PooledCharacter> NewPooledCharacterClass)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Setting new PooledCharacterClass: %s"), *NewPooledCharacterClass->GetName());
+	//UE_LOG(LogTemp, Warning, TEXT("Setting new PooledCharacterClass: %s"), *NewPooledCharacterClass->GetName());
 	PooledCharacterClass = NewPooledCharacterClass;
 	if (CharacterPool.Num() != 0)
 	{
@@ -63,7 +63,7 @@ void UPOA_CharacterPool::ExtendPool()
 {
 	if (Extending)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Already extending pool, skipping..."));
+		//UE_LOG(LogTemp, Warning, TEXT("Already extending pool, skipping..."));
 		return;
 	}
 	Extending = true;
@@ -74,7 +74,7 @@ void UPOA_CharacterPool::ExtendPool()
 	UWorld* World = GetWorld();
 	if (!World)
 	{
-		UE_LOG(LogTemp, Error, TEXT("UPOA_CharacterPool::BeginPlay: World is null!"));
+		//UE_LOG(LogTemp, Error, TEXT("UPOA_CharacterPool::BeginPlay: World is null!"));
 		return;
 	}
 
@@ -94,12 +94,12 @@ void UPOA_CharacterPool::ExtendPool()
 			}
 			else
 			{
-				UE_LOG(LogTemp, Error, TEXT("Failed to spawn Pooled Character!"));
+				//UE_LOG(LogTemp, Error, TEXT("Failed to spawn Pooled Character!"));
 			}
 		}
 		else
 		{
-			UE_LOG(LogTemp, Error, TEXT("PooledCharacterClass is not set!"));
+			//UE_LOG(LogTemp, Error, TEXT("PooledCharacterClass is not set!"));
 		}
 	}
 	Extending = false;
