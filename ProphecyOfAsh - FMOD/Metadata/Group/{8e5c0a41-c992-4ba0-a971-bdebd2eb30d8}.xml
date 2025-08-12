@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="MixerGroup" id="{8e5c0a41-c992-4ba0-a971-bdebd2eb30d8}">
 		<property name="volume">
-			<value>-7.5</value>
+			<value>-4</value>
 		</property>
 		<property name="name">
 			<value>Music</value>
@@ -24,7 +24,6 @@
 		<relationship name="effects">
 			<destination>{2f203330-8635-492e-a14c-431ad5ed0200}</destination>
 			<destination>{478c7ce1-0ddd-49ef-82ce-f57121bf2c1f}</destination>
-			<destination>{3bae92af-78ce-40b9-a611-eb32ffce7b3d}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{8d7f84ff-31db-4b44-ba71-d6554375b629}" />
@@ -44,23 +43,6 @@
 		</property>
 		<relationship name="sidechains">
 			<destination>{119c5f73-1764-4140-a9d2-32032e6e2510}</destination>
-		</relationship>
-	</object>
-	<object class="CompressorEffect" id="{3bae92af-78ce-40b9-a611-eb32ffce7b3d}">
-		<property name="threshold">
-			<value>-16</value>
-		</property>
-		<property name="ratio">
-			<value>1.55000007</value>
-		</property>
-		<property name="attackTime">
-			<value>9.80000019</value>
-		</property>
-		<property name="releaseTime">
-			<value>84</value>
-		</property>
-		<relationship name="sidechains">
-			<destination>{dd83b031-4de1-444b-b0fb-2cf583008d9d}</destination>
 		</relationship>
 	</object>
 </objects>

@@ -60,7 +60,7 @@
 			<destination>{29029dc9-fe41-4b77-937a-96ddac2397fa}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{fa544346-87a5-4a0e-8d8b-f5d8796f0540}</destination>
+			<destination>{6c8f01fd-cb5e-4221-ab96-2235b44d6d28}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{2481ccbf-c00f-41b7-b347-53864c80b16a}">
@@ -68,7 +68,7 @@
 			<value>3</value>
 		</property>
 		<property name="maximumDistance">
-			<value>85</value>
+			<value>95</value>
 		</property>
 	</object>
 	<object class="MarkerTrack" id="{1554ec16-8f1a-4f17-9263-4a74f578c1e4}" />
@@ -191,14 +191,10 @@
 	<object class="MixerBusEffectChain" id="{bf8166ed-8b2a-4bcc-9635-f30b96814777}">
 		<relationship name="effects">
 			<destination>{c98266ee-633d-4171-88d3-07a77a5a7916}</destination>
-			<destination>{82202c96-3b27-4e79-9098-6374ea170432}</destination>
+			<destination>{f4181b1e-e366-4049-ae7f-4daf672e6dfb}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{3a8f555e-8c9b-49e2-bed5-2ae7c984a007}">
-		<property name="surroundPanDirection">
-			<value>109.290039</value>
-		</property>
-	</object>
+	<object class="MixerBusPanner" id="{3a8f555e-8c9b-49e2-bed5-2ae7c984a007}" />
 	<object class="MultiSound" id="{b1630595-4db1-4df8-b9e5-d60c77bf4f43}">
 		<relationship name="sounds">
 			<destination>{de656b94-cdb7-4db0-a479-2e2b90e7ca3d}</destination>
@@ -265,15 +261,15 @@
 	</object>
 	<object class="MixerBusPanner" id="{11758e8d-ef55-4994-b832-27eda8c09ca2}" />
 	<object class="MixerBusFader" id="{c98266ee-633d-4171-88d3-07a77a5a7916}" />
-	<object class="SpatialiserEffect" id="{82202c96-3b27-4e79-9098-6374ea170432}">
+	<object class="SpatialiserEffect" id="{f4181b1e-e366-4049-ae7f-4daf672e6dfb}">
 		<property name="extentMode">
 			<value>1</value>
 		</property>
 		<property name="soundSize">
-			<value>2.79999995</value>
+			<value>1.60000002</value>
 		</property>
 		<property name="minimumExtent">
-			<value>52</value>
+			<value>64</value>
 		</property>
 	</object>
 	<object class="SingleSound" id="{de656b94-cdb7-4db0-a479-2e2b90e7ca3d}">
