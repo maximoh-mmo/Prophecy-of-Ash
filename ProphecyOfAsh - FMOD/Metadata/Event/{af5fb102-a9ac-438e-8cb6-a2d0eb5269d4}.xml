@@ -59,7 +59,7 @@
 			<destination>{6b2f7a78-6b96-4fa8-9824-2eb045db444f}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{e9c9ba12-86a5-42c8-98a4-972579ac5a97}</destination>
+			<destination>{fa544346-87a5-4a0e-8d8b-f5d8796f0540}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{d33fe8de-5ba9-4a95-a785-8418d1ffb4f6}">
@@ -130,7 +130,11 @@
 			<destination>{b8444def-6909-4cc1-a4ee-bb159225c436}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{ca7c8d7b-bc5d-4ef4-af77-546673e39ba1}" />
+	<object class="MixerBusPanner" id="{ca7c8d7b-bc5d-4ef4-af77-546673e39ba1}">
+		<property name="surroundPanDirection">
+			<value>109.290039</value>
+		</property>
+	</object>
 	<object class="MultiSound" id="{03c87cee-e5d3-4d7d-9f5c-70a1e15a7e69}">
 		<property name="volume">
 			<value>-2.5</value>
@@ -164,7 +168,17 @@
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{2209c87e-d0e0-4ed7-b73b-4d82f2844c88}" />
-	<object class="SpatialiserEffect" id="{ceb3b663-8d54-4648-a8e3-ad42de5f3709}" />
+	<object class="SpatialiserEffect" id="{ceb3b663-8d54-4648-a8e3-ad42de5f3709}">
+		<property name="extentMode">
+			<value>1</value>
+		</property>
+		<property name="soundSize">
+			<value>4.5999999</value>
+		</property>
+		<property name="minimumExtent">
+			<value>50</value>
+		</property>
+	</object>
 	<object class="ThreeEQEffect" id="{b8444def-6909-4cc1-a4ee-bb159225c436}">
 		<property name="midGain">
 			<value>-1.5</value>
