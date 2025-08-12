@@ -59,12 +59,12 @@
 			<destination>{3d09acf0-dad7-45c6-89fc-f0a74fc94929}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{2f322f6a-17bf-46f4-8cc8-760762c9b8ea}</destination>
+			<destination>{e7f4e4ae-4072-4efd-b9f7-b043cf27c015}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{79ff9c95-3a27-43f4-a59f-f616826e626c}">
 		<property name="maximumDistance">
-			<value>85</value>
+			<value>95</value>
 		</property>
 	</object>
 	<object class="MarkerTrack" id="{807928f8-99b8-499f-9062-2c3df4c6b954}" />
@@ -129,11 +129,7 @@
 			<destination>{cda96611-8f1b-4fbd-bb30-66bc026e805d}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{2b4a7ddf-759d-44d1-975c-2f3801fd1dca}">
-		<property name="surroundPanDirection">
-			<value>109.290039</value>
-		</property>
-	</object>
+	<object class="MixerBusPanner" id="{2b4a7ddf-759d-44d1-975c-2f3801fd1dca}" />
 	<object class="MultiSound" id="{40a7fa79-fe81-4192-85fe-f617e18abf00}">
 		<relationship name="sounds">
 			<destination>{c670457c-0012-4868-87fd-88acd39a3d5e}</destination>
@@ -161,10 +157,10 @@
 			<value>1</value>
 		</property>
 		<property name="soundSize">
-			<value>4.80000019</value>
+			<value>1.60000002</value>
 		</property>
 		<property name="minimumExtent">
-			<value>70</value>
+			<value>64</value>
 		</property>
 	</object>
 	<object class="SingleSound" id="{c670457c-0012-4868-87fd-88acd39a3d5e}">
