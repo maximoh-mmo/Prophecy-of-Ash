@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="MixerGroup" id="{6c8f01fd-cb5e-4221-ab96-2235b44d6d28}">
+		<property name="volume">
+			<value>-2</value>
+		</property>
+		<property name="name">
+			<value>Ifrit</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{52f2ccf5-206d-4718-80b0-703434a51d8d}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{4e6b9094-735b-468b-bfc4-a4f9ec3377ae}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{e9c9ba12-86a5-42c8-98a4-972579ac5a97}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{52f2ccf5-206d-4718-80b0-703434a51d8d}">
+		<relationship name="effects">
+			<destination>{33ccc5c1-d4a3-42ce-bc63-eb1f69a214ea}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{4e6b9094-735b-468b-bfc4-a4f9ec3377ae}" />
+	<object class="MixerBusFader" id="{33ccc5c1-d4a3-42ce-bc63-eb1f69a214ea}" />
+</objects>
