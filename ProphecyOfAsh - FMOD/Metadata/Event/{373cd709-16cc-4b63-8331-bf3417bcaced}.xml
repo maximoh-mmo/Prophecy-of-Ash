@@ -59,7 +59,7 @@
 			<destination>{87c64d2b-5d35-4ae2-a75f-9fd4ed286668}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{e9c9ba12-86a5-42c8-98a4-972579ac5a97}</destination>
+			<destination>{fa544346-87a5-4a0e-8d8b-f5d8796f0540}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{d7ca95c5-d824-4b3c-8bba-d58f52798517}">
@@ -131,7 +131,11 @@
 			<destination>{9561d5b8-6bfb-440c-909c-393e631fc514}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{e11a461f-d134-4108-b124-c0ad7c2da446}" />
+	<object class="MixerBusPanner" id="{e11a461f-d134-4108-b124-c0ad7c2da446}">
+		<property name="surroundPanDirection">
+			<value>109.290039</value>
+		</property>
+	</object>
 	<object class="MultiSound" id="{b1dc6bc5-99ee-4b9b-91b9-0010179cfe03}">
 		<property name="volume">
 			<value>-5</value>
@@ -191,7 +195,17 @@
 			<value>-9.5</value>
 		</property>
 	</object>
-	<object class="SpatialiserEffect" id="{9561d5b8-6bfb-440c-909c-393e631fc514}" />
+	<object class="SpatialiserEffect" id="{9561d5b8-6bfb-440c-909c-393e631fc514}">
+		<property name="extentMode">
+			<value>1</value>
+		</property>
+		<property name="soundSize">
+			<value>3.60000014</value>
+		</property>
+		<property name="minimumExtent">
+			<value>28</value>
+		</property>
+	</object>
 	<object class="RandomizerModulator" id="{87c4a1ac-f5c0-4ddc-a5d6-772e188e0260}">
 		<property name="nameOfPropertyBeingModulated">
 			<value>pitch</value>
